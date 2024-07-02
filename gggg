@@ -13,24 +13,18 @@ local Section = Tab:AddSection({
 })
 
 OrionLib:MakeNotification({
-	Name = "Title!",
-	Content = "Notification content... what will it say??",
+	Name = "info!",
+	Content = "Hey! i dont have a youtube, X,Facebook, ONLY DISCORD",
 	Image = "rbxassetid://4483345998",
-	Time = 5
+	Time = 10
 })
 
-Tab:AddButton({
-	Name = "Button!",
-	Callback = function()
-      		print("button pressed")
-  	end    
-})
 
 Tab:AddSlider({
-	Name = "Slider",
+	Name = "WalkSpeed",
 	Min = 0,
 	Max = 1500,
-	Default = 5,
+	Default = 20,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
 	ValueName = "WalkSpeed",
@@ -40,16 +34,28 @@ Tab:AddSlider({
 })
 
 Tab:AddSlider({
-	Name = "Slider",
+	Name = "JumpPower",
 	Min = 0,
 	Max = 400,
-	Default = 5,
+	Default = 50,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
 	ValueName = "JumpPower",
 	Callback = function(Value)
 		Game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
 	end    
+})
+
+Tab:AddButton({
+	Name = "infinite jump",
+	Callback = function()
+      		local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJumpEnabled then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
+  	end    
 })
 
 local Tab = Window:MakeTab({
@@ -59,8 +65,49 @@ local Tab = Window:MakeTab({
 })
 
 Tab:AddButton({
+	Name = "Fly GUI",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()  
+})
+
+
+
+local Tab = Window:MakeTab({
+	Name = "ESP",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
 	Name = "ESP TEAM COLOR",
 	Callback = function()
       		loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP"))()
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "universal hubs",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "infinite yield",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "ghost hub",
+	Callback = function()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Sirius",
+	Callback = function()
+      		loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Sirius-Pro-9527", true))()
   	end    
 })
