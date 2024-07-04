@@ -1,0 +1,9 @@
+local lighting = game:GetService("Lighting")
+
+lighting.FogEnd = 1000000 
+lighting.FogStart = 1000000
+lighting.Atmosphere.Density = 0
+
+lighting.Brightness = 2
+lighting.Ambient = Color3.new(1, 1, 1)
+lighting.OutdoorAmbient = Color3.new(1, 1, 1)
