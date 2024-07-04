@@ -1,0 +1,15 @@
+local lighting = game:GetService("Lighting")
+
+-- Устанавливаем время суток на 00:00 (полночь)
+lighting.TimeOfDay = "00:00:00"
+
+-- Настраиваем параметры освещения для более светлой ночи
+lighting.Brightness = 2
+lighting.ClockTime = 0
+lighting.FogEnd = 1000000
+lighting.FogStart = 1000000
+lighting.OutdoorAmbient = Color3.new(0.4, 0.4, 0.6) -- Светло-синий цвет для ночной атмосферы
+lighting.Ambient = Color3.new(0.5, 0.5, 0.7) -- Еще светлее для улучшенной видимости
+
+-- Убедитесь, что GlobalShadows включены для более реалистичного освещения
+lighting.GlobalShadows = true
