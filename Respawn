@@ -1,0 +1,40 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local teleportInterval = 2
+local maxSurvivors = 2 
+local distanceBelowFeet = 3 
+local originalPosition = humanoidRootPart.CFrame 
+
+local function getRandomSurvivors()
+    local survivors = {}
+    for _, p in ipairs(game.Players:GetPlayers()) do
+        if p.Team and p.Team.Name == "Survivor" and p ~= player then
+            table.insert(survivors, p)
+        end
+    end
+    local selectedSurvivors = {}
+    for i = 1, math.min(maxSurvivors, #survivors) do
+        local index = math.random(1, #survivors)
+        table.insert(selectedSurvivors, survivors[index])
+        table.remove(survivors, index)
+    end
+    return selectedSurvivors
+end
+
+local function followSurvivors()
+    local survivors = getRandomSurvivors()
+    for _, targetPlayer in ipairs(survivors) do
+        if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local targetHRP = targetPlayer.Character.HumanoidRootPart
+            for _ = 1, teleportInterval / 0.1 do
+                humanoidRootPart.CFrame = targetHRP.CFrame * CFrame.new(0, -distanceBelowFeet, 0) 
+                wait(0.1)
+            end
+        end
+    end
+    humanoidRootPart.CFrame = originalPosition 
+end
+
+followSurvivors()
