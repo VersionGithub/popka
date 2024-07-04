@@ -1,0 +1,59 @@
+-- Подключаем необходимые сервисы
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Список карт с их названиями в workspace
+local mapNames = {
+    ["scary Garry Academy"] = true,
+    ["Happy Neighborhood"] = true,
+    ["space lab"] = true,
+    ["Classic Fair Grounds"] = true,
+    ["Haunted Mansion"] = true,
+    ["DeadMan's Point"] = true,
+    ["Skate zone"] = true,
+    ["Darkwood Asylum"] = true,
+    ["Water Treatment Facility"] = true,
+    ["Fair Grounds"] = true,
+    ["night school"] = true,
+    ["papa rony's pizzeria"] = true
+}
+
+-- Функция для телепортации к каждому предмету лута
+local function teleportToLoot()
+    local playerCharacter = LocalPlayer.Character
+    if not playerCharacter then
+        print("Игрок не найден")
+        return
+    end
+
+    -- Перебираем все карты в workspace
+    for mapName, _ in pairs(mapNames) do
+        local map = workspace:FindFirstChild(mapName)
+        if map then
+            print("Карта найдена: " .. mapName)
+            local lootSpawns = map:FindFirstChild("LootSpawns")
+            if lootSpawns then
+                print("LootSpawns найдены на карте: " .. mapName)
+                -- Перебираем предметы лута на карте
+                for _, loot in pairs(lootSpawns:GetChildren()) do
+                    if loot:IsA("BasePart") then
+                        -- Телепортируем игрока к текущему предмету лута
+                        LocalPlayer.Character:SetPrimaryPartCFrame(loot.CFrame)
+                        print("Телепортирован к луту: " .. loot.Name)
+                        -- Ждем 1 секунду перед телепортацией к следующему предмету
+                        wait(1)
+                    end
+                end
+            else
+                print("LootSpawns не найдены на карте: " .. mapName)
+            end
+        else
+            print("Карта не найдена: " .. mapName)
+        end
+    end
+
+    print("Телепортировано ко всем предметам лута.")
+end
+
+-- Запускаем телепортацию сразу после активации скрипта
+teleportToLoot()
