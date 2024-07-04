@@ -1,0 +1,12 @@
+local lighting = game:GetService("Lighting")
+
+-- Устанавливаем время суток на 12:00 (полдень)
+lighting.TimeOfDay = "12:00:00"
+
+-- Дополнительно можно настроить яркость и другие параметры освещения для дневного времени
+lighting.Brightness = 2
+lighting.ClockTime = 12
+lighting.FogEnd = 1000000
+lighting.FogStart = 1000000
+lighting.OutdoorAmbient = Color3.new(1, 1, 1)
+lighting.Ambient = Color3.new(1, 1, 1)
