@@ -1,0 +1,27 @@
+local function removeRatTraps()
+    -- Название карты
+    local mapName = "Space Lab"
+    
+    -- Найти карту в workspace
+    local map = workspace:FindFirstChild(mapName)
+    
+    if map then
+        -- Найти папку RatTraps в карте
+        local ratTrapsFolder = map:FindFirstChild("RatTraps")
+        
+        if ratTrapsFolder then
+            -- Удалить все объекты в папке RatTraps
+            for _, trap in pairs(ratTrapsFolder:GetChildren()) do
+                trap:Destroy()
+            end
+            print("Все объекты в папке RatTraps были удалены.")
+        else
+            print("Папка RatTraps не найдена.")
+        end
+    else
+        print("Карта не найдена.")
+    end
+end
+
+-- Запустить функцию удаления сразу после активации скрипта
+removeRatTraps()
