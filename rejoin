@@ -1,0 +1,13 @@
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Функция для перезахода на тот же сервер
+local function rejoinSameServer()
+    local placeId = game.PlaceId
+    local jobId = game.JobId
+    TeleportService:TeleportToPlaceInstance(placeId, jobId, player)
+end
+
+-- Вызов функции для перезахода на тот же сервер
+rejoinSameServer()
