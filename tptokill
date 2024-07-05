@@ -1,0 +1,17 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local function teleportToKiller()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player.Team and player.Team.Name == "Killer" then
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                LocalPlayer.Character:SetPrimaryPartCFrame(player.Character.HumanoidRootPart.CFrame)
+                print("Телепортировано к игроку из команды Killer: " .. player.Name)
+                return
+            end
+        end
+    end
+    print("Игрок в команде Killer не найден.")
+end
+
+teleportToKiller()
