@@ -1,0 +1,20 @@
+-- Функция для изменения цвета неба
+local function changeSkyColor(color)
+    local lighting = game:GetService("Lighting")
+    local sky = lighting:FindFirstChildOfClass("Sky")
+    if not sky then
+        sky = Instance.new("Sky")
+        sky.Parent = lighting
+    end
+
+    sky.SkyboxBk = "rbxassetid://4644843921"
+    sky.SkyboxDn = "rbxassetid://4644843921"
+    sky.SkyboxFt = "rbxassetid://4644843921"
+    sky.SkyboxLf = "rbxassetid://4644843921"
+    sky.SkyboxRt = "rbxassetid://4644843921"
+    sky.SkyboxUp = "rbxassetid://4644843921"
+
+    lighting.Ambient = color
+    lighting.OutdoorAmbient = color
+    lighting.FogColor = color
+end
