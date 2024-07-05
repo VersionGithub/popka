@@ -1,0 +1,362 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Survive The Killer", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "movement"
+})
+
+OrionLib:MakeNotification({
+	Name = "info!",
+	Content = "Hey! i dont have a youtube, X,Facebook, ONLY DISCORD",
+	Image = "rbxassetid://4483345998",
+	Time = 10
+})
+
+
+Tab:AddSlider({
+	Name = "WalkSpeed (20 defolt)",
+	Min = 0,
+	Max = 1500,
+	Default = 20,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "WalkSpeed",
+	Callback = function(Value)
+		Game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+Tab:AddSlider({
+	Name = "JumpPower",
+	Min = 0,
+	Max = 400,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "JumpPower",
+	Callback = function(Value)
+		Game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+	end    
+})
+
+local currentFOV = workspace.CurrentCamera.FieldOfView
+
+local function changeFOV(value)
+    currentFOV = value
+    workspace.CurrentCamera.FieldOfView = currentFOV
+end
+
+Tab:AddSlider({
+    Name = "Field of View",
+    Min = 70,
+    Max = 120,
+    Default = currentFOV,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 1,
+    ValueName = "FOV",
+    Callback = function(value)
+        changeFOV(value)
+    end    
+})
+
+local InfiniteJumpEnabled = false
+
+Tab:AddToggle({
+    Name = "Бесконечный прыжок",
+    Default = false,
+    Callback = function(Value)
+        InfiniteJumpEnabled = Value
+        print("Бесконечный прыжок:", Value)
+    end    
+})
+
+game:GetService("UserInputService").JumpRequest:connect(function()
+    if InfiniteJumpEnabled then
+        local player = game:GetService("Players").LocalPlayer
+        local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid:ChangeState("Jumping")
+        end
+    end
+end)
+
+-- Переменные для отслеживания состояния Noclip
+local NoclipEnabled = false
+local Noclip = nil
+local Clip = nil
+
+-- Функция для включения Noclip
+function noclip()
+    Clip = false
+    local function Nocl()
+        if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+            for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                if v:IsA('BasePart') and v.CanCollide then
+                    v.CanCollide = false
+                end
+            end
+        end
+        wait(0.21) -- basic optimization
+    end
+    Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+-- Функция для выключения Noclip
+function clip()
+    if Noclip then Noclip:Disconnect() end
+    Clip = true
+    if game.Players.LocalPlayer.Character ~= nil then
+        for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+            if v:IsA('BasePart') and not v.CanCollide then
+                v.CanCollide = true
+            end
+        end
+    end
+end
+
+-- Добавьте чекбокс (Checkbox)
+Tab:AddToggle({
+    Name = "Noclip",
+    Default = false,
+    Callback = function(Value)
+        NoclipEnabled = Value
+        if NoclipEnabled then
+            noclip()
+        else
+            clip()
+        end
+        print("Noclip:", Value)
+    end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "полезные функции",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "Respawn",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/Respawn"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "телепортация к игрокам (для убийцы)",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/Respawn"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "телепортация к предметам (авто фарм)",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/auto"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "удаление ловушек от убийцы",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/trap"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "удаление ловушек на карте Space Lab",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/rattrap"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "телепортация к убийце",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/tptokill"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "перезаход на этот сервер",
+	Callback = function()
+      		local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local function rejoinSameServer()
+    local placeId = game.PlaceId
+    local jobId = game.JobId
+    TeleportService:TeleportToPlaceInstance(placeId, jobId, player)
+end
+
+-- Вызов функции для перезахода на тот же сервер
+rejoinSameServer()
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "Visual",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "ESP For All (bugging)",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "No fog",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/NoFog"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "DAY",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/DAY"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "NIGHT",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/NIGHT"))()
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "teleports",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "lobby",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(6.67236805, 260.462708, -11.615901)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Happy Neighborhood",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(361.760071, 48.6851654, -2363.01489)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "scary Garry Academy",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-808.964905, 30.4980621, -2422.4624)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "space lab",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-124.537109, 33.3040466, -2938.69678)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Haunted Mansion",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-185.761276, 8.70447636, -2200.78125)
+  	end    
+})
+
+
+Tab:AddButton({
+	Name = "DeadMan's Point",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(1162.25427, 237.646408, -2872.86914)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Darkwood Asylum",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-837.925049, 30.5468903, -2569.90015)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Water Treatment Facility",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-346.766174, 28.5057716, -2453.37671)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Fair Grounds",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-375.744629, 22.8658581, -3990.86743)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Skate zone",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-373.848999, 7.25809288, -2667.47144)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Night school",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-126.526398, 35.9654465, -2466.26221)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "papa ronny's pizzeria",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-539.673096, 44.7455978, -2584.21558)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Classic Willow Marsh",
+	Callback = function()
+      		game.Players.LocalPlayer.Character. HumanoidRootPart.CFrame = CFrame.new(-201.106094, 5.18249655, -1934.57874)
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "universal hubs",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "infinite yield",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "ghost hub",
+	Callback = function()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Sirius",
+	Callback = function()
+      		loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Sirius-Pro-9527", true))()
+  	end    
+})
