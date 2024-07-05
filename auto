@@ -18,16 +18,22 @@ local mapNames = {
     ["papa rony's pizzeria"] = true
 }
 
--- Функция для телепортации к каждому предмету лута
-local function teleportToLoot()
+-- Функция для телепортации к предметам лута (максимум 8 предметов)
+local function teleportToLoot(maxTeleports)
     local playerCharacter = LocalPlayer.Character
     if not playerCharacter then
         print("Игрок не найден")
         return
     end
 
+    local teleports = 0
+
     -- Перебираем все карты в workspace
     for mapName, _ in pairs(mapNames) do
+        if teleports >= maxTeleports then
+            break
+        end
+
         local map = workspace:FindFirstChild(mapName)
         if map then
             print("Карта найдена: " .. mapName)
@@ -40,8 +46,12 @@ local function teleportToLoot()
                         -- Телепортируем игрока к текущему предмету лута
                         LocalPlayer.Character:SetPrimaryPartCFrame(loot.CFrame)
                         print("Телепортирован к луту: " .. loot.Name)
+                        teleports = teleports + 1
                         -- Ждем 1 секунду перед телепортацией к следующему предмету
                         wait(1)
+                        if teleports >= maxTeleports then
+                            break
+                        end
                     end
                 end
             else
@@ -52,8 +62,8 @@ local function teleportToLoot()
         end
     end
 
-    print("Телепортировано ко всем предметам лута.")
+    print("Телепортировано к " .. teleports .. " предметам лута.")
 end
 
--- Запускаем телепортацию сразу после активации скрипта
-teleportToLoot()
+-- Запускаем телепортацию сразу после активации скрипта (максимум 8 предметов)
+teleportToLoot(8)
