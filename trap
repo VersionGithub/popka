@@ -1,0 +1,17 @@
+-- Подключаем необходимые сервисы
+local Workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+
+-- Функция для автоматического удаления предметов Trap
+local function autoRemoveTraps()
+    RunService.Heartbeat:Connect(function()
+        for _, obj in pairs(Workspace:GetDescendants()) do
+            if obj.Name == "Trap" then
+                obj:Destroy()
+            end
+        end
+    end)
+end
+
+-- Запускаем автоматическое удаление ловушек сразу после активации скрипта
+autoRemoveTraps()
