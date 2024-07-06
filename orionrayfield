@@ -1,0 +1,419 @@
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local language = "en"
+local texts = {
+    en = {
+        main_tab = "Main",
+        movement_section = "Movement",
+        info_notification = "info!",
+        info_content = "Hey! I don't have a YouTube, X, Facebook, ONLY DISCORD",
+        walkspeed_slider = "WalkSpeed (20 default)",
+        jumppower_slider = "JumpPower",
+        fov_slider = "Field of View",
+        infinite_jump_toggle = "Infinite Jump",
+        noclip_toggle = "Noclip",
+        useful_functions_tab = "Useful Functions",
+        respawn_button = "Respawn",
+        tp_players_button = "Teleport to players (for killer)",
+        tp_items_button = "Teleport to items (auto farm)",
+        remove_traps_button = "Remove traps from killer",
+        remove_space_lab_traps_button = "Remove traps on Space Lab map",
+        tp_killer_button = "Teleport to killer",
+        rejoin_server_button = "Rejoin this server",
+        visual_tab = "Visual",
+        esp_button = "ESP For All (bugging)",
+        no_fog_button = "No fog",
+        day_button = "DAY",
+        night_button = "NIGHT",
+        teleports_tab = "Teleports",
+        universal_hubs_tab = "Universal Hubs",
+        infinite_yield_button = "Infinite Yield",
+        ghost_hub_button = "Ghost Hub",
+        sirius_button = "Sirius"
+    },
+    ru = {
+        main_tab = "Главное",
+        movement_section = "Движение",
+        info_notification = "Информация!",
+        info_content = "Привет! У меня нет YouTube, X, Facebook, ТОЛЬКО DISCORD",
+        walkspeed_slider = "Скорость ходьбы (20 по умолчанию)",
+        jumppower_slider = "Сила прыжка",
+        fov_slider = "Поле зрения",
+        infinite_jump_toggle = "Бесконечный прыжок",
+        noclip_toggle = "Noclip",
+        useful_functions_tab = "Полезные функции",
+        respawn_button = "Возродиться",
+        tp_players_button = "Телепортация к игрокам (для убийцы)",
+        tp_items_button = "Телепортация к предметам (авто фарм)",
+        remove_traps_button = "Удаление ловушек от убийцы",
+        remove_space_lab_traps_button = "Удаление ловушек на карте Space Lab",
+        tp_killer_button = "Телепортация к убийце",
+        rejoin_server_button = "Перезаход на этот сервер",
+        visual_tab = "Визуализация",
+        esp_button = "ESP For All (баги)",
+        no_fog_button = "Без тумана",
+        day_button = "ДЕНЬ",
+        night_button = "НОЧЬ",
+        teleports_tab = "Телепорты",
+        universal_hubs_tab = "Универсальные хабы",
+        infinite_yield_button = "Infinite Yield",
+        ghost_hub_button = "Ghost Hub",
+        sirius_button = "Sirius"
+    }
+}
+
+local function translateUI()
+    if Rayfield then
+        Rayfield:Notify({
+            Title = texts[language].info_notification,
+            Content = texts[language].info_content,
+            Duration = 10,
+            Image = 4483345998
+        })
+    end
+
+    if MainTab then MainTab:SetName(texts[language].main_tab) end
+    if MovementSection then MovementSection:SetName(texts[language].movement_section) end
+    if WalkSpeedSlider then WalkSpeedSlider:SetName(texts[language].walkspeed_slider) end
+    if JumpPowerSlider then JumpPowerSlider:SetName(texts[language].jumppower_slider) end
+    if FOVSlider then FOVSlider:SetName(texts[language].fov_slider) end
+    if InfiniteJumpToggle then InfiniteJumpToggle:SetName(texts[language].infinite_jump_toggle) end
+    if NoclipToggle then NoclipToggle:SetName(texts[language].noclip_toggle) end
+
+    if UsefulFunctionsTab then UsefulFunctionsTab:SetName(texts[language].useful_functions_tab) end
+    if RespawnButton then RespawnButton:SetName(texts[language].respawn_button) end
+    if TPPlayersButton then TPPlayersButton:SetName(texts[language].tp_players_button) end
+    if TPItemsButton then TPItemsButton:SetName(texts[language].tp_items_button) end
+    if RemoveTrapsButton then RemoveTrapsButton:SetName(texts[language].remove_traps_button) end
+    if RemoveSpaceLabTrapsButton then RemoveSpaceLabTrapsButton:SetName(texts[language].remove_space_lab_traps_button) end
+    if TPKillerButton then TPKillerButton:SetName(texts[language].tp_killer_button) end
+    if RejoinServerButton then RejoinServerButton:SetName(texts[language].rejoin_server_button) end
+
+    if VisualTab then VisualTab:SetName(texts[language].visual_tab) end
+    if ESPButton then ESPButton:SetName(texts[language].esp_button) end
+    if NoFogButton then NoFogButton:SetName(texts[language].no_fog_button) end
+    if DayButton then DayButton:SetName(texts[language].day_button) end
+    if NightButton then NightButton:SetName(texts[language].night_button) end
+
+    if TeleportsTab then TeleportsTab:SetName(texts[language].teleports_tab) end
+
+    if UniversalHubsTab then UniversalHubsTab:SetName(texts[language].universal_hubs_tab) end
+    if InfiniteYieldButton then InfiniteYieldButton:SetName(texts[language].infinite_yield_button) end
+    if GhostHubButton then GhostHubButton:SetName(texts[language].ghost_hub_button) end
+    if SiriusButton then SiriusButton:SetName(texts[language].sirius_button) end
+end
+
+local Window = Rayfield:CreateWindow({
+    Name = "Survive The Killer",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "RayfieldTest"
+})
+
+local MainTab = Window:CreateTab(texts[language].main_tab, 4483345998)
+
+local MovementSection = MainTab:CreateSection(texts[language].movement_section)
+
+Rayfield:Notify({
+    Title = texts[language].info_notification,
+    Content = texts[language].info_content,
+    Duration = 10,
+    Image = 4483345998
+})
+
+local WalkSpeedSlider = MainTab:CreateSlider({
+    Name = texts[language].walkspeed_slider,
+    Range = {0, 1500},
+    Increment = 1,
+    Suffix = "WalkSpeed",
+    CurrentValue = 20,
+    Flag = "WalkSpeedSlider",
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    end
+})
+
+local JumpPowerSlider = MainTab:CreateSlider({
+    Name = texts[language].jumppower_slider,
+    Range = {0, 400},
+    Increment = 1,
+    Suffix = "JumpPower",
+    CurrentValue = 50,
+    Flag = "JumpPowerSlider",
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+    end
+})
+
+local currentFOV = workspace.CurrentCamera.FieldOfView
+
+local function changeFOV(value)
+    currentFOV = value
+    workspace.CurrentCamera.FieldOfView = currentFOV
+end
+
+local FOVSlider = MainTab:CreateSlider({
+    Name = texts[language].fov_slider,
+    Range = {70, 120},
+    Increment = 1,
+    Suffix = "FOV",
+    CurrentValue = currentFOV,
+    Flag = "FOVSlider",
+    Callback = function(value)
+        changeFOV(value)
+    end
+})
+
+local InfiniteJumpEnabled = false
+
+local InfiniteJumpToggle = MainTab:CreateToggle({
+    Name = texts[language].infinite_jump_toggle,
+    CurrentValue = false,
+    Flag = "InfiniteJumpToggle",
+    Callback = function(Value)
+        InfiniteJumpEnabled = Value
+        print("Infinite Jump:", Value)
+    end
+})
+
+game:GetService("UserInputService").JumpRequest:connect(function()
+    if InfiniteJumpEnabled then
+        local player = game:GetService("Players").LocalPlayer
+        local humanoid = player.Character and player.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid:ChangeState("Jumping")
+        end
+    end
+end)
+
+local NoclipEnabled = false
+
+local NoclipToggle = MainTab:CreateToggle({
+    Name = texts[language].noclip_toggle,
+    CurrentValue = false,
+    Flag = "NoclipToggle",
+    Callback = function(Value)
+        NoclipEnabled = Value
+    end
+})
+
+game:GetService("RunService").Stepped:connect(function()
+    if NoclipEnabled then
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character then
+            for _, child in pairs(character:GetChildren()) do
+                if child:IsA("BasePart") and child.CanCollide then
+                    child.CanCollide = false
+                end
+            end
+        end
+    end
+end)
+
+local UsefulFunctionsTab = Window:CreateTab(texts[language].useful_functions_tab, 4483345998)
+
+local RespawnButton = UsefulFunctionsTab:CreateButton({
+    Name = texts[language].respawn_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/Respawn"))()
+    end
+})
+
+local TPPlayersButton = UsefulFunctionsTab:CreateButton({
+    Name = texts[language].tp_players_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/Respawn"))()
+    end
+})
+
+local TPItemsButton = UsefulFunctionsTab:CreateButton({
+    Name = texts[language].tp_items_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/auto"))()
+    end
+})
+
+local RemoveTrapsButton = UsefulFunctionsTab:CreateButton({
+    Name = texts[language].remove_traps_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/trap"))()
+    end
+})
+
+local RemoveSpaceLabTrapsButton = UsefulFunctionsTab:CreateButton({
+    Name = texts[language].remove_space_lab_traps_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/rattrap"))()
+    end
+})
+
+local TPKillerButton = UsefulFunctionsTab:CreateButton({
+    Name = texts[language].tp_killer_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/tptokill"))()
+    end
+})
+
+local RejoinServerButton = UsefulFunctionsTab:CreateButton({
+    Name = texts[language].rejoin_server_button,
+    Callback = function()
+        local TeleportService = game:GetService("TeleportService")
+        local Players = game:GetService("Players")
+        local player = Players.LocalPlayer
+
+        local function rejoinSameServer()
+            local placeId = game.PlaceId
+            local jobId = game.JobId
+            TeleportService:TeleportToPlaceInstance(placeId, jobId, player)
+        end
+
+        rejoinSameServer()
+    end
+})
+
+local VisualTab = Window:CreateTab(texts[language].visual_tab, 4483345998)
+
+local ESPButton = VisualTab:CreateButton({
+    Name = texts[language].esp_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP"))()
+    end
+})
+
+local NoFogButton = VisualTab:CreateButton({
+    Name = texts[language].no_fog_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/NoFog"))()
+    end
+})
+
+local DayButton = VisualTab:CreateButton({
+    Name = texts[language].day_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/DAY"))()
+    end
+})
+
+local NightButton = VisualTab:CreateButton({
+    Name = texts[language].night_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VersionGithub/popka/main/NIGHT"))()
+    end
+})
+
+local TeleportsTab = Window:CreateTab(texts[language].teleports_tab, 4483345998)
+
+TeleportsTab:CreateButton({
+    Name = "lobby",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(6.67236805, 260.462708, -11.615901)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Happy Neighborhood",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(361.760071, 48.6851654, -2363.01489)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "scary Garry Academy",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-808.964905, 30.4980621, -2422.4624)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "space lab",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-124.537109, 33.3040466, -2938.69678)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Haunted Mansion",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-185.761276, 8.70447636, -2200.78125)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "DeadMan's Point",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1162.25427, 237.646408, -2872.86914)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Darkwood Asylum",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-837.925049, 30.5468903, -2569.90015)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Water Treatment Facility",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-346.766174, 28.5057716, -2453.37671)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Fair Grounds",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-375.744629, 22.8658581, -3990.86743)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Skate zone",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-373.848999, 7.25809288, -2667.47144)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Night school",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-126.526398, 35.9654465, -2466.26221)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "papa ronny's pizzeria",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-539.673096, 44.7455978, -2584.21558)
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Classic Willow Marsh",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-201.106094, 5.18249655, -1934.57874)
+    end
+})
+
+local UniversalHubsTab = Window:CreateTab(texts[language].universal_hubs_tab, 4483345998)
+
+local InfiniteYieldButton = UniversalHubsTab:CreateButton({
+    Name = texts[language].infinite_yield_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    end
+})
+
+local GhostHubButton = UniversalHubsTab:CreateButton({
+    Name = texts[language].ghost_hub_button,
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/GhostHub'))()
+    end
+})
+
+local SiriusButton = UniversalHubsTab:CreateButton({
+    Name = texts[language].sirius_button,
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Sirius-Pro-9527", true))()
+    end
+})
