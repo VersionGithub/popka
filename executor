@@ -1,0 +1,464 @@
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local HttpService = game:GetService("HttpService")
+local CoreGui = game:GetService("CoreGui")
+
+-- Функция для отправки уведомлений
+local function sendNotification(title, text)
+    local notification = Instance.new("ScreenGui")
+    notification.Name = "Notification"
+    notification.Parent = CoreGui
+
+    local frame = Instance.new("Frame")
+    frame.Position = UDim2.new(0.5, -100, 0.1, 0)
+    frame.Size = UDim2.new(0, 300, 0, 100)
+    frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    frame.BackgroundTransparency = 0.2
+    frame.BorderSizePixel = 0
+    frame.Parent = notification
+
+    local uICorner = Instance.new("UICorner")
+    uICorner.CornerRadius = UDim.new(0, 15)
+    uICorner.Parent = frame
+
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Position = UDim2.new(0, 10, 0, 10)
+    titleLabel.Size = UDim2.new(1, -20, 0.3, 0)
+    titleLabel.Text = title
+    titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    titleLabel.TextSize = 24
+    titleLabel.Font = Enum.Font.GothamBold
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Parent = frame
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Position = UDim2.new(0, 10, 0.4, 0)
+    textLabel.Size = UDim2.new(1, -20, 0.5, 0)
+    textLabel.Text = text
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.TextSize = 18
+    textLabel.Font = Enum.Font.Gotham
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextWrapped = true
+    textLabel.Parent = frame
+
+    wait(5)
+    notification:Destroy()
+end
+
+-- Создаем меню
+local menu = Instance.new("ScreenGui")
+menu.Name = "CustomMenu"
+menu.Parent = CoreGui
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+mainFrame.Size = UDim2.new(0, 600, 0, 300)
+mainFrame.BackgroundColor3 = Color3.fromRGB(75, 0, 130)
+mainFrame.BorderSizePixel = 0
+mainFrame.BackgroundTransparency = 0.1
+mainFrame.Parent = menu
+
+local uICorner = Instance.new("UICorner")
+uICorner.CornerRadius = UDim.new(0, 15)
+uICorner.Parent = mainFrame
+
+local shadow = Instance.new("Frame")
+shadow.Position = UDim2.new(0, 5, 0, 5)
+shadow.Size = mainFrame.Size
+shadow.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+shadow.BorderSizePixel = 0
+shadow.BackgroundTransparency = 0.7
+shadow.Parent = mainFrame
+
+-- Перемещение меню
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+mainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+mainFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+-- Заголовок
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Position = UDim2.new(0, 10, 0, 10)
+titleLabel.Size = UDim2.new(0, 200, 0, 40)
+titleLabel.Text = "VersionHub"
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextSize = 24
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.BackgroundTransparency = 1
+titleLabel.Parent = mainFrame
+
+-- Анимация текста
+local function animateText()
+    while true do
+        for i = 0, 1, 0.01 do
+            titleLabel.TextColor3 = Color3.fromHSV(i, 1, 1)
+            wait(0.05)
+        end
+    end
+end
+
+spawn(animateText)
+
+-- Поле для ввода скрипта
+local scriptBox = Instance.new("TextBox")
+scriptBox.Position = UDim2.new(0.05, 0, 0.3, 0)
+scriptBox.Size = UDim2.new(0.5, 0, 0.5, 0)
+scriptBox.Text = ""
+scriptBox.PlaceholderText = "Введите ваш скрипт здесь..."
+scriptBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+scriptBox.TextWrapped = true
+scriptBox.TextXAlignment = Enum.TextXAlignment.Left
+scriptBox.TextYAlignment = Enum.TextYAlignment.Top
+scriptBox.Font = Enum.Font.SourceSans
+scriptBox.TextSize = 18
+scriptBox.ClearTextOnFocus = false
+scriptBox.BackgroundTransparency = 0.5
+scriptBox.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+scriptBox.BorderSizePixel = 0
+scriptBox.MultiLine = true
+scriptBox.Parent = mainFrame
+
+local uICorner2 = Instance.new("UICorner")
+uICorner2.CornerRadius = UDim.new(0, 10)
+uICorner2.Parent = scriptBox
+
+-- Переменная для хранения текста скрипта
+local scriptText = ""
+
+-- Функция для выполнения скрипта
+local function executeScript()
+    scriptText = scriptBox.Text
+    if scriptText and scriptText ~= "" then
+        local success, err = pcall(function() loadstring(scriptText)() end)
+        if success then
+            sendNotification("Script", "Script executed!")
+        else
+            sendNotification("Script", "Error executing script: " .. err)
+        end
+    else
+        sendNotification("Script", "No script to execute!")
+    end
+end
+
+-- Кнопка выполнения скрипта
+local executeButton = Instance.new("TextButton")
+executeButton.Position = UDim2.new(0.55, 0, 0.85, 0)
+executeButton.Size = UDim2.new(0, 40, 0, 40)
+executeButton.Text = "►"
+executeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+executeButton.Font = Enum.Font.SourceSansBold
+executeButton.TextSize = 24
+executeButton.BackgroundTransparency = 0.5
+executeButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+executeButton.BorderSizePixel = 0
+executeButton.Parent = mainFrame
+
+local uICorner3 = Instance.new("UICorner")
+uICorner3.CornerRadius = UDim.new(0, 10)
+uICorner3.Parent = executeButton
+
+-- Кнопка очистки скрипта
+local clearButton = Instance.new("TextButton")
+clearButton.Position = UDim2.new(0.65, 0, 0.85, 0)
+clearButton.Size = UDim2.new(0, 40, 0, 40)
+clearButton.Text = "🗑️"
+clearButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+clearButton.Font = Enum.Font.SourceSansBold
+clearButton.TextSize = 24
+clearButton.BackgroundTransparency = 0.5
+clearButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+clearButton.BorderSizePixel = 0
+clearButton.Parent = mainFrame
+
+local uICorner4 = Instance.new("UICorner")
+uICorner4.CornerRadius = UDim.new(0, 10)
+uICorner4.Parent = clearButton
+
+-- Функция для очистки скрипта
+local function clearScript()
+    scriptText = ""
+    scriptBox.Text = ""
+    sendNotification("Script", "Script cleared!")
+end
+
+executeButton.MouseButton1Click:Connect(executeScript)
+clearButton.MouseButton1Click:Connect(clearScript)
+
+-- Система вкладок
+local tabsFrame = Instance.new("Frame")
+tabsFrame.Position = UDim2.new(0.05, 0, 0.2, 0)
+tabsFrame.Size = UDim2.new(0.9, 0, 0.1, 0)
+tabsFrame.BackgroundTransparency = 1
+tabsFrame.Parent = mainFrame
+
+local tabs = {}
+local activeTab
+
+local function createTab(name)
+    local tabButton = Instance.new("TextButton")
+    tabButton.Size = UDim2.new(0, 100, 0, 30)
+    tabButton.Text = name
+    tabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    tabButton.Font = Enum.Font.SourceSansBold
+    tabButton.TextSize = 14
+    tabButton.BackgroundTransparency = 0.5
+    tabButton.BackgroundColor3 = mainFrame.BackgroundColor3
+    tabButton.BorderSizePixel = 0
+    tabButton.Parent = tabsFrame
+
+    local uICorner5 = Instance.new("UICorner")
+    uICorner5.CornerRadius = UDim.new(0, 10)
+    uICorner5.Parent = tabButton
+
+    tabButton.MouseButton1Click:Connect(function()
+        if activeTab then
+            activeTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+        end
+        activeTab = tabButton
+        activeTab.TextColor3 = Color3.fromRGB(0, 255, 0)
+        scriptBox.Text = tabs[name] or ""
+    end)
+
+    tabs[name] = ""
+    return tabButton
+end
+
+-- Создаем первую вкладку
+local initialTab = createTab("Tab 1")
+initialTab.Position = UDim2.new(0, 0, 0, 0)
+activeTab = initialTab
+activeTab.TextColor3 = Color3.fromRGB(0, 255, 0)
+
+-- Кнопка для добавления новых вкладок
+local addTabButton = Instance.new("TextButton")
+addTabButton.Size = UDim2.new(0, 30, 0, 30)
+addTabButton.Position = UDim2.new(0, 110, 0, 0)
+addTabButton.Text = "+"
+addTabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+addTabButton.Font = Enum.Font.SourceSansBold
+addTabButton.TextSize = 24
+addTabButton.BackgroundTransparency = 0.5
+addTabButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+addTabButton.BorderSizePixel = 0
+addTabButton.Parent = tabsFrame
+
+local uICorner6 = Instance.new("UICorner")
+uICorner6.CornerRadius = UDim.new(0, 10)
+uICorner6.Parent = addTabButton
+
+local tabCount = 1
+
+addTabButton.MouseButton1Click:Connect(function()
+    tabCount = tabCount + 1
+    local newTab = createTab("Tab " .. tabCount)
+    newTab.Position = UDim2.new((tabCount - 1) * 0.2, 0, 0, 0)
+end)
+
+-- Синхронизация вкладок с темой
+local function syncTabsColor()
+    for _, tabButton in pairs(tabsFrame:GetChildren()) do
+        if tabButton:IsA("TextButton") and tabButton.Text ~= "+" then
+            tabButton.BackgroundColor3 = mainFrame.BackgroundColor3
+        end
+    end
+end
+
+-- Смена темы
+local themeButton = Instance.new("TextButton")
+themeButton.Position = UDim2.new(0.75, 0, 0.85, 0)
+themeButton.Size = UDim2.new(0, 40, 0, 40)
+themeButton.Text = "🌈"
+themeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+themeButton.Font = Enum.Font.SourceSansBold
+themeButton.TextSize = 24
+themeButton.BackgroundTransparency = 0.5
+themeButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+themeButton.BorderSizePixel = 0
+themeButton.Parent = mainFrame
+
+local uICorner7 = Instance.new("UICorner")
+uICorner7.CornerRadius = UDim.new(0, 10)
+uICorner7.Parent = themeButton
+
+local themeColors = {
+    ["Red"] = Color3.fromRGB(255, 0, 0),
+    ["Green"] = Color3.fromRGB(0, 255, 0),
+    ["Blue"] = Color3.fromRGB(0, 0, 255),
+    ["Pink"] = Color3.fromRGB(255, 192, 203),
+    ["Yellow"] = Color3.fromRGB(255, 255, 0),
+    ["Cyan"] = Color3.fromRGB(0, 255, 255),
+    ["Magenta"] = Color3.fromRGB(255, 0, 255),
+    ["White"] = Color3.fromRGB(255, 255, 255),
+    ["Black"] = Color3.fromRGB(0, 0, 0),
+    ["RGB"] = nil -- специальная тема
+}
+
+themeButton.MouseButton1Click:Connect(function()
+    local themeMenu = Instance.new("Frame")
+    themeMenu.Position = UDim2.new(0.5, -100, 0.3, 0)
+    themeMenu.Size = UDim2.new(0, 200, 0, 120)
+    themeMenu.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    themeMenu.BorderSizePixel = 0
+    themeMenu.Parent = mainFrame
+
+    local uICorner8 = Instance.new("UICorner")
+    uICorner8.CornerRadius = UDim.new(0, 10)
+    uICorner8.Parent = themeMenu
+
+    for theme, color in pairs(themeColors) do
+        local themeButton = Instance.new("TextButton")
+        themeButton.Size = UDim2.new(1, 0, 0.2, 0)
+        themeButton.Position = UDim2.new(0, 0, 0, (#themeMenu:GetChildren() - 1) * 25)
+        themeButton.Text = theme
+        themeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        themeButton.Font = Enum.Font.SourceSansBold
+        themeButton.TextSize = 14
+        themeButton.BackgroundTransparency = 0.5
+        themeButton.BackgroundColor3 = color or Color3.fromRGB(50, 50, 50)
+        themeButton.BorderSizePixel = 0
+        themeButton.Parent = themeMenu
+
+        themeButton.MouseButton1Click:Connect(function()
+            if theme == "RGB" then
+                spawn(function()
+                    while mainFrame.BackgroundColor3 == nil do
+                        for i = 0, 1, 0.01 do
+                            mainFrame.BackgroundColor3 = Color3.fromHSV(i, 1, 1)
+                            syncTabsColor()
+                            wait(0.05)
+                        end
+                    end
+                end)
+            else
+                mainFrame.BackgroundColor3 = color
+            end
+            themeMenu:Destroy()
+            syncTabsColor()
+        end)
+    end
+end)
+
+-- Кнопка для скрытия/показывания меню
+local toggleButton = Instance.new("TextButton")
+toggleButton.Position = UDim2.new(0.9, 0, 0, 0)
+toggleButton.Size = UDim2.new(0, 40, 0, 40)
+toggleButton.Text = "-"
+toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleButton.Font = Enum.Font.SourceSansBold
+toggleButton.TextSize = 24
+toggleButton.BackgroundTransparency = 0.5
+toggleButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+toggleButton.BorderSizePixel = 0
+toggleButton.Parent = mainFrame
+
+local uICorner9 = Instance.new("UICorner")
+uICorner9.CornerRadius = UDim.new(0, 10)
+uICorner9.Parent = toggleButton
+
+local minimized = false
+
+toggleButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    mainFrame.Visible = not minimized
+    toggleButton.Text = minimized and "+" or "-"
+end)
+
+-- Оставляем кнопку при скрытии меню
+mainFrame:GetPropertyChangedSignal("Visible"):Connect(function()
+    if not mainFrame.Visible then
+        toggleButton.Visible = true
+    end
+end)
+
+toggleButton:GetPropertyChangedSignal("Visible"):Connect(function()
+    if not toggleButton.Visible then
+        mainFrame.Visible = true
+    end
+end)
+
+-- Поле для диалога с нейросетью
+local dialogFrame = Instance.new("Frame")
+dialogFrame.Position = UDim2.new(0.6, 0, 0.3, 0)
+dialogFrame.Size = UDim2.new(0.35, 0, 0.6, 0)
+dialogFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+dialogFrame.BackgroundTransparency = 0.5
+dialogFrame.BorderSizePixel = 0
+dialogFrame.Parent = mainFrame
+
+local uICorner10 = Instance.new("UICorner")
+uICorner10.CornerRadius = UDim.new(0, 10)
+uICorner10.Parent = dialogFrame
+
+local dialogBox = Instance.new("TextBox")
+dialogBox.Position = UDim2.new(0, 10, 0, 10)
+dialogBox.Size = UDim2.new(1, -20, 1, -50)
+dialogBox.Text = ""
+dialogBox.PlaceholderText = "Введите ваш запрос здесь..."
+dialogBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+dialogBox.TextWrapped = true
+dialogBox.TextXAlignment = Enum.TextXAlignment.Left
+dialogBox.TextYAlignment = Enum.TextYAlignment.Top
+dialogBox.Font = Enum.Font.SourceSans
+dialogBox.TextSize = 18
+dialogBox.ClearTextOnFocus = false
+dialogBox.BackgroundTransparency = 1
+dialogBox.MultiLine = true
+dialogBox.Parent = dialogFrame
+
+local sendButton = Instance.new("TextButton")
+sendButton.Position = UDim2.new(0.75, 0, 0.9, 0)
+sendButton.Size = UDim2.new(0.2, 0, 0.1, 0)
+sendButton.Text = "Send"
+sendButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+sendButton.Font = Enum.Font.SourceSansBold
+sendButton.TextSize = 18
+sendButton.BackgroundTransparency = 0.5
+sendButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+sendButton.BorderSizePixel = 0
+sendButton.Parent = dialogFrame
+
+local uICorner11 = Instance.new("UICorner")
+uICorner11.CornerRadius = UDim.new(0, 10)
+uICorner11.Parent = sendButton
+
+sendButton.MouseButton1Click:Connect(function()
+    local query = dialogBox.Text
+    -- Здесь вы можете интегрировать API вашего нейросетевого сервиса
+    sendNotification("AI Response", "Ответ нейросети на ваш запрос: " .. query)
+    dialogBox.Text = ""
+end)
+
+-- Завершаем инициализацию
+sendNotification("Welcome", "VersionHub loaded successfully!")
