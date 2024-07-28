@@ -1,0 +1,219 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Anti - AFK|VersionHUB", HidePremium = false, IntroText = "VersionHUB"})
+
+local startAfk = false
+
+local actions = {
+    jump = false,
+    randomPress = false,
+    moveForward = false,
+    moveRight = false,
+    moveLeft = false,
+    moveBackward = false,
+    moveCircle = false,
+    teleport = false
+}
+
+local function jumpAction()
+    while true do
+        if startAfk and actions.jump then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "Space", false, game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "Space", false, game)
+        else
+            wait(0.1)
+        end
+    end
+end
+
+local function randomPressAction()
+    local keys = {"W", "A", "S", "D"}
+    while true do
+        if startAfk and actions.randomPress then
+            local key = keys[math.random(1, #keys)]
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, key, false, game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, key, false, game)
+        else
+            wait(0.1)
+        end
+    end
+end
+
+local function moveForwardAction()
+    while true do
+        if startAfk and actions.moveForward then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "W", false, game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "W", false, game)
+        else
+            wait(0.1)
+        end
+    end
+end
+
+local function moveRightAction()
+    while true do
+        if startAfk and actions.moveRight then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "D", false, game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "D", false, game)
+        else
+            wait(0.1)
+        end
+    end
+end
+
+local function moveLeftAction()
+    while true do
+        if startAfk and actions.moveLeft then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "A", false, game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "A", false, game)
+        else
+            wait(0.1)
+        end
+    end
+end
+
+local function moveBackwardAction()
+    while true do
+        if startAfk and actions.moveBackward then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, "S", false, game)
+            wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, "S", false, game)
+        else
+            wait(0.1)
+        end
+    end
+end
+
+local function moveCircleAction()
+    while true do
+        if startAfk and actions.moveCircle then
+            local player = game.Players.LocalPlayer
+            local character = player.Character or player.CharacterAdded:Wait()
+            local humanoid = character:WaitForChild("Humanoid")
+            local rootPart = character:WaitForChild("HumanoidRootPart")
+            local radius = 10
+            local speed = 0.1
+
+            for i = 0, 360, 5 do
+                if not startAfk or not actions.moveCircle then
+                    break
+                end
+                local radians = math.rad(i)
+                local x = math.cos(radians) * radius
+                local z = math.sin(radians) * radius
+                humanoid:MoveTo(rootPart.Position + Vector3.new(x, 0, z))
+                wait(speed)
+            end
+        else
+            wait(0.1)
+        end
+    end
+end
+
+local function teleportAction()
+    local function randomTeleport()
+        local x = math.random(-100, 100)
+        local y = math.random(5, 50)
+        local z = math.random(-100, 100)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x, y, z)
+    end
+
+    while true do
+        if startAfk and actions.teleport then
+            randomTeleport()
+            wait(3)
+        else
+            wait(0.1)
+        end
+    end
+end
+
+local Tab = Window:MakeTab({
+    Name = "Anti-AFK",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+Tab:AddToggle({
+    Name = "активировать анти афк",
+    Default = false,
+    Callback = function(value)
+        startAfk = value
+        if not value then
+            for k, v in pairs(actions) do
+                actions[k] = false
+            end
+        end
+    end
+})
+Tab:AddToggle({
+    Name = "прыжок",
+    Default = false,
+    Callback = function(value)
+        actions.jump = value
+    end
+})
+Tab:AddToggle({
+    Name = "хаотичный бег",
+    Default = false,
+    Callback = function(value)
+        actions.randomPress = value
+    end
+})
+Tab:AddToggle({
+    Name = "бег вперёд",
+    Default = false,
+    Callback = function(value)
+        actions.moveForward = value
+    end
+})
+Tab:AddToggle({
+    Name = "бег вправо",
+    Default = false,
+    Callback = function(value)
+        actions.moveRight = value
+    end
+})
+Tab:AddToggle({
+    Name = "бег влево",
+    Default = false,
+    Callback = function(value)
+        actions.moveLeft = value
+    end
+})
+Tab:AddToggle({
+    Name = "баг назад",
+    Default = false,
+    Callback = function(value)
+        actions.moveBackward = value
+    end
+})
+Tab:AddToggle({
+    Name = "бег кругом",
+    Default = false,
+    Callback = function(value)
+        actions.moveCircle = value
+    end
+})
+Tab:AddToggle({
+    Name = "рандомно телепортироваться",
+    Default = false,
+    Callback = function(value)
+        actions.teleport = value
+    end
+})
+
+spawn(jumpAction)
+spawn(randomPressAction)
+spawn(moveForwardAction)
+spawn(moveRightAction)
+spawn(moveLeftAction)
+spawn(moveBackwardAction)
+spawn(moveCircleAction)
+spawn(teleportAction)
+
+OrionLib:Init()
