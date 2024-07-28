@@ -186,7 +186,7 @@ Tab:AddToggle({
     end
 })
 Tab:AddToggle({
-    Name = "баг назад",
+    Name = "бег назад",
     Default = false,
     Callback = function(value)
         actions.moveBackward = value
