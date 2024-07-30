@@ -1,0 +1,305 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Чамсы и Телепорт", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+
+local ChamsTab = Window:MakeTab({
+    Name = "Чамсы",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+
+local TeleportTab = Window:MakeTab({
+    Name = "Телепорт",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+
+local SkyPlatformTab = Window:MakeTab({
+    Name = "Небесная Платформа",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+
+local ChamsEnabledF1 = false
+local ChamsEnabledAll = false
+local MaxHealthEnabled = false
+local FullbrightEnabled = false
+
+
+ChamsTab:AddToggle({
+    Name = "Включить чамсы для игроков с f1",
+    Default = false,
+    Callback = function(Value)
+        ChamsEnabledF1 = Value
+        if not ChamsEnabledF1 then
+            
+            for _, player in pairs(game.Players:GetPlayers()) do
+                local character = player.Character
+                if character and character:FindFirstChild("f1") and character:FindFirstChild("HighlightF1") then
+                    character.HighlightF1:Destroy()
+                end
+            end
+        end
+    end
+})
+
+
+ChamsTab:AddToggle({
+    Name = "Включить чамсы для всех игроков",
+    Default = false,
+    Callback = function(Value)
+        ChamsEnabledAll = Value
+        if not ChamsEnabledAll then
+            
+            for _, player in pairs(game.Players:GetPlayers()) do
+                local character = player.Character
+                if character and character:FindFirstChild("HighlightAll") then
+                    character.HighlightAll:Destroy()
+                end
+            end
+        end
+    end
+})
+
+
+local function enableChamsF1(player)
+    if ChamsEnabledF1 then
+        local character = player.Character
+        if character and not character:FindFirstChild("HighlightF1") then
+            local highlight = Instance.new("Highlight")
+            highlight.Name = "HighlightF1"
+            highlight.Adornee = character
+            highlight.FillColor = Color3.fromRGB(255, 0, 0) 
+            highlight.OutlineColor = Color3.fromRGB(255, 255, 255) 
+            highlight.Parent = character
+        end
+    end
+end
+
+
+local function enableChamsAll(player)
+    if ChamsEnabledAll and not player.Character:FindFirstChild("f1") then
+        local character = player.Character
+        if character and not character:FindFirstChild("HighlightAll") then
+            local highlight = Instance.new("Highlight")
+            highlight.Name = "HighlightAll"
+            highlight.Adornee = character
+            highlight.FillColor = Color3.fromRGB(0, 255, 0) 
+            highlight.OutlineColor = Color3.fromRGB(255, 255, 255) 
+            highlight.Parent = character
+        end
+    end
+end
+
+
+local function checkForF1Item()
+    for _, player in pairs(game.Players:GetPlayers()) do
+        local character = player.Character
+        if character then
+            if character:FindFirstChild("f1") then
+                enableChamsF1(player)
+            else
+                enableChamsAll(player)
+            end
+        end
+    end
+end
+
+
+game:GetService("RunService").RenderStepped:Connect(function()
+    checkForF1Item()
+end)
+
+
+local function teleportTo(player)
+    local localPlayer = game.Players.LocalPlayer
+    if localPlayer.Character and player.Character then
+        localPlayer.Character:SetPrimaryPartCFrame(player.Character:GetPrimaryPartCFrame())
+    end
+end
+
+
+TeleportTab:AddButton({
+    Name = "Телепорт к игроку с f1",
+    Callback = function()
+        for _, player in pairs(game.Players:GetPlayers()) do
+            if player.Character and player.Character:FindFirstChild("f1") then
+                teleportTo(player)
+                break
+            end
+        end
+    end
+})
+
+
+local PlayerDropdown = TeleportTab:AddDropdown({
+    Name = "Выбрать игрока для телепортации",
+    Options = {},
+    Callback = function(selectedPlayerName)
+        local selectedPlayer = game.Players:FindFirstChild(selectedPlayerName)
+        if selectedPlayer then
+            teleportTo(selectedPlayer)
+        end
+    end
+})
+
+
+local function updatePlayerDropdown()
+    local playerNames = {}
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Character and not player.Character:FindFirstChild("f1") then
+            table.insert(playerNames, player.Name)
+        end
+    end
+    PlayerDropdown:Refresh(playerNames)
+end
+
+
+TeleportTab:AddButton({
+    Name = "Обновить список игроков",
+    Callback = function()
+        updatePlayerDropdown()
+    end
+})
+
+
+local function createSkyPlatform()
+    local platform = Instance.new("Part")
+    platform.Name = "SkyPlatform"
+    platform.Size = Vector3.new(100, 1, 100)
+    platform.Position = Vector3.new(0, 5000, 0) 
+    platform.Anchored = true
+    platform.Parent = workspace
+    return platform
+end
+
+
+local skyPlatform = createSkyPlatform()
+
+
+local function teleportToSkyPlatform()
+    local localPlayer = game.Players.LocalPlayer
+    if localPlayer.Character then
+        localPlayer.Character:SetPrimaryPartCFrame(skyPlatform.CFrame + Vector3.new(2000, 0, 0)) 
+    end
+end
+
+
+local function createSimpleModel()
+    local localPlayer = game.Players.LocalPlayer
+    if localPlayer.Character then
+        local character = localPlayer.Character
+        for _, part in pairs(character:GetChildren()) do
+            if part:IsA("BasePart") and part.Name ~= "HumanoidRootPart" then
+                part.Transparency = 1 
+            end
+        end
+        
+        local function createLimb(name, size, position)
+            local limb = Instance.new("Part")
+            limb.Name = name
+            limb.Size = size
+            limb.Position = position
+            limb.Anchored = false
+            limb.CanCollide = false
+            limb.Parent = character
+            local weld = Instance.new("WeldConstraint")
+            weld.Part0 = character.HumanoidRootPart
+            weld.Part1 = limb
+            weld.Parent = limb
+        end
+        createLimb("LeftArm", Vector3.new(1, 2, 1), character.HumanoidRootPart.Position + Vector3.new(-1, 0, 0))
+        createLimb("RightArm", Vector3.new(1, 2, 1), character.HumanoidRootPart.Position + Vector3.new(1, 0, 0))
+        createLimb("LeftLeg", Vector3.new(1, 2, 1), character.HumanoidRootPart.Position + Vector3.new(-0.5, -2, 0))
+        createLimb("RightLeg", Vector3.new(1, 2, 1), character.HumanoidRootPart.Position + Vector3.new(0.5, -2, 0))
+    end
+end
+
+
+local function keepMaxHealth()
+    local localPlayer = game.Players.LocalPlayer
+    if localPlayer.Character then
+        local humanoid = localPlayer.Character:FindFirstChildOfClass("Humanoid")
+        if humanoid then
+            humanoid.Health = humanoid.MaxHealth
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("SetHealth"):FireServer(humanoid.MaxHealth)
+        end
+    end
+end
+
+
+local function toggleFullbright(enabled)
+    local lighting = game:GetService("Lighting")
+    if enabled then
+        lighting.Brightness = 2
+        lighting.ClockTime = 14
+        lighting.FogEnd = 100000
+        lighting.GlobalShadows = false
+        lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+    else
+        
+        lighting.Brightness = 1
+        lighting.ClockTime = 14
+        lighting.FogEnd = 100000
+        lighting.GlobalShadows = true
+        lighting.OutdoorAmbient = Color3.fromRGB(127, 127, 127)
+    end
+end
+
+
+SkyPlatformTab:AddToggle({
+    Name = "Телепорт на небесную платформу",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            teleportToSkyPlatform()
+        end
+    end
+})
+
+
+SkyPlatformTab:AddToggle({
+    Name = "Создать простую модель игрока",
+    Default = false,
+    Callback = function(Value)
+        if Value then
+            createSimpleModel()
+        end
+    end
+})
+
+
+SkyPlatformTab:AddToggle({
+    Name = "Постоянное максимальное здоровье",
+    Default = false,
+    Callback = function(Value)
+        MaxHealthEnabled = Value
+        if MaxHealthEnabled then
+            
+            game:GetService("RunService").RenderStepped:Connect(function()
+                keepMaxHealth()
+            end)
+        end
+    end
+})
+
+
+SkyPlatformTab:AddToggle({
+    Name = "Фулбрайт",
+    Default = false,
+    Callback = function(Value)
+        FullbrightEnabled = Value
+        toggleFullbright(FullbrightEnabled)
+    end
+})
+
+
+OrionLib:Init()
+
+
+updatePlayerDropdown()
