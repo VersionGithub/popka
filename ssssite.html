@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://crownsoftworks.neocities.org/bio -->
+<html lang="ru"><div id="in-page-channel-node-id" data-channel-name="in_page_channel_QzXtWD"></div><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v e r s i o n </title>
+<link rel="icon" type="image/png" href="https://crownsoftworks.neocities.org/Crown.png">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="./v e r s i n_files/css2" rel="stylesheet">
+
+<script>
+const CONFIG = {
+  BG_TYPE   : 'video',
+  VIDEO_SRC : 'https://r2.guns.lol/e36b3d0f-4f8a-492d-978c-b0bcd76ae3db.mp4',
+  IMAGE_SRC : '',
+  BG_SIZE   : 'auto',
+  BG_EFFECTS: ['snow'],
+  AVATAR_URL : '',
+  NAME : 'versiondev',
+  NAME_EFFECTS : ['typewriter', 'rainbow'],
+  BIO : 'Experienced scripter and owner of "Crown Softworks".\n2+ years of scripting for Roblox.',
+  LOCATION : 'Russia',
+  DISCORD_ID : '814887268283056139',
+  CARD_STATIC : {
+    name   : 'v22.12.24',
+    tag1   : '🔥 CODE',
+    tag2   : '❤',
+    status : '🎮 1.000.000+ hours in roblox',
+  },
+  SOCIALS : [
+    { id:'roblox',  href:'', title:'Roblox'  },
+    { id:'youtube', href:'', title:'YouTube' },
+    { id:'discord', href:'', title:'Discord' },
+    { id:'website', href:'', title:'Website' },
+  ],
+  PLAYLIST : [
+    { track:'Снежинка', artist:'mzlff',    cover:'1.jpg', url:'https://github.com/ExclusiveVersionGithubIsLoaded/music/raw/refs/heads/main/mzlff-snezhinka.mp3' },
+    { track:'Анабиоз',      artist:'mzlff', cover:'2.jpg', url:'https://github.com/ExclusiveVersionGithubIsLoaded/music/raw/refs/heads/main/mzlff-sted.d-anabioz.mp3' },
+  ],
+  TAB_TEXT : 'v e r s i o n ',
+
+
+};
+</script>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*{cursor:none !important}
+#cur{position:fixed;top:0;left:0;z-index:9999;pointer-events:none}
+#cur-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);box-shadow:0 0 12px 4px rgba(255,255,255,.9),0 0 24px 8px rgba(255,255,255,.4)}
+#cur-ring{display:none}
+
+body{height:100%;font-family:'Inter',sans-serif;color:#fff;overflow:hidden;background-color:#000;background-repeat:no-repeat;background-position:center center;background-attachment:fixed}
+html{height:100%}
+#bg-video{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-5;object-fit:cover;object-position:center center;display:none}
+.overlay{position:fixed;inset:0;z-index:-4;background:radial-gradient(ellipse 65% 70% at 50% 40%,rgba(0,0,0,.1) 0%,rgba(0,0,0,.6) 100%),linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.5) 100%)}
+
+.fx-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+#fx-snow,#fx-rain,#fx-night{z-index:-3}
+#tv-layer{position:fixed;inset:0;z-index:-2;pointer-events:none;display:none}
+#tv-layer.on{display:block}
+.tv-scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px)}
+.tv-noise{position:absolute;inset:0;animation:tvf .1s steps(1) infinite}
+@keyframes tvf{0%{opacity:.04}25%{opacity:.08}50%{opacity:.03}75%{opacity:.07}100%{opacity:.05}}
+.tv-vignette{position:absolute;inset:0;background:radial-gradient(ellipse 100% 100% at 50% 50%,transparent 55%,rgba(0,0,0,.6) 100%)}
+.tv-rgb{position:absolute;inset:0;mix-blend-mode:screen;animation:tvrgb .07s steps(1) infinite}
+@keyframes tvrgb{0%{background:rgba(255,0,0,.018)}33%{background:rgba(0,255,0,.018)}66%{background:rgba(0,0,255,.018)}100%{background:rgba(255,255,0,.01)}}
+.tv-hline{position:absolute;left:0;right:0;height:2px;background:rgba(255,255,255,.04);animation:tvhl 8s linear infinite}
+@keyframes tvhl{from{top:-2px}to{top:100vh}}
+
+#splash{position:fixed;inset:0;z-index:8000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;backdrop-filter:blur(20px) brightness(.65);-webkit-backdrop-filter:blur(20px) brightness(.65);background:rgba(0,0,0,.25);transition:opacity .65s ease,visibility .65s ease}
+#splash.gone{opacity:0;visibility:hidden;pointer-events:none}
+.splash-hint{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.35);font-weight:400;animation:sh-pulse 2.5s ease-in-out infinite}
+@keyframes sh-pulse{0%,100%{opacity:.35}50%{opacity:.7}}
+.splash-title{font-size:1.6rem;font-weight:700;color:rgba(255,255,255,.9);letter-spacing:.04em;text-shadow:0 0 40px rgba(255,255,255,.2)}
+
+.center{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px}
+
+.avatar-wrap{position:relative;width:100px;height:100px;margin-bottom:18px}
+.avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;display:block;border:3px solid rgba(255,255,255,.22);box-shadow:0 4px 28px rgba(0,0,0,.65),0 0 0 4px rgba(255,255,255,.05);background:linear-gradient(135deg,#667eea,#764ba2)}
+
+.name{font-size:1.9rem;font-weight:700;letter-spacing:.02em;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.8);margin-bottom:14px;position:relative;display:inline-block;min-height:2.4rem;min-width:60px}
+.name.fx-glow{animation:nglow 2.5s ease-in-out infinite}
+@keyframes nglow{0%,100%{text-shadow:0 0 10px #fff,0 0 30px #fff,0 0 80px rgba(255,255,255,.55),0 0 160px rgba(200,180,255,.35)}50%{text-shadow:0 0 20px #fff,0 0 60px #fff,0 0 130px rgba(255,255,255,.75),0 0 230px rgba(200,180,255,.55)}}
+.name.fx-rainbow{animation:nrainbow 3s linear infinite}
+@keyframes nrainbow{0%{color:#ff6b6b;text-shadow:0 0 18px #ff6b6b}16%{color:#ffd93d;text-shadow:0 0 18px #ffd93d}33%{color:#6bcb77;text-shadow:0 0 18px #6bcb77}50%{color:#4d96ff;text-shadow:0 0 18px #4d96ff}66%{color:#c77dff;text-shadow:0 0 18px #c77dff}83%{color:#ff9a3c;text-shadow:0 0 18px #ff9a3c}100%{color:#ff6b6b;text-shadow:0 0 18px #ff6b6b}}
+#np-wrap{position:absolute;inset:-50px;pointer-events:none;overflow:visible}
+.np{position:absolute;border-radius:50%;background:#fff;animation:npfly var(--dur,3s) ease-in-out infinite var(--del,0s) both}
+@keyframes npfly{0%{transform:translate(var(--sx),var(--sy)) scale(1);opacity:.9}50%{transform:translate(var(--mx),var(--my)) scale(.5);opacity:.4}100%{transform:translate(var(--ex),var(--ey)) scale(0);opacity:0}}
+.tw-cur{animation:twb .65s step-end infinite}
+@keyframes twb{0%,100%{opacity:1}50%{opacity:0}}
+
+.bio{max-width:420px;font-size:.88rem;line-height:1.72;color:rgba(255,255,255,.88);text-shadow:0 1px 4px rgba(0,0,0,.9);margin-bottom:10px;white-space:pre-line}
+
+.ticker-wrap{width:100%;max-width:420px;overflow:hidden;margin-bottom:14px;position:relative;mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent)}
+.ticker-track{display:flex;align-items:center;gap:0;width:max-content;animation:ticker-scroll 22s linear infinite}
+.ticker-wrap:hover .ticker-track{animation-play-state:paused}
+@keyframes ticker-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{display:inline-flex;align-items:center;gap:6px;padding:0 18px;white-space:nowrap;font-size:.72rem;color:rgba(255,255,255,.45);font-weight:500;letter-spacing:.03em;transition:color .2s}
+.ticker-item svg{width:15px;height:15px;flex-shrink:0;opacity:.7}
+.ticker-sep{width:1px;height:12px;background:rgba(255,255,255,.12);flex-shrink:0}
+.ticker-main{color:rgba(255,255,255,.85) !important}
+.ticker-main svg{opacity:1 !important;filter:drop-shadow(0 0 4px rgba(255,255,255,.5))}
+.ticker-item:hover{color:rgba(255,255,255,.9) !important}
+.ticker-item:hover svg{opacity:1 !important}
+
+.location{display:inline-flex;align-items:center;gap:5px;font-size:.77rem;color:rgba(255,255,255,.5);margin-bottom:16px;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+.location svg{width:12px;height:12px;fill:rgba(255,255,255,.5)}
+
+.card{background:rgba(28,26,34,.45);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:15px 18px;display:flex;align-items:center;gap:14px;margin-bottom:18px;max-width:340px;width:100%;backdrop-filter:blur(10px);box-shadow:0 4px 30px rgba(0,0,0,.35)}
+.card-av-wrap{position:relative;flex-shrink:0}
+.card-av{width:46px;height:46px;border-radius:50%;object-fit:cover;display:block;background:linear-gradient(135deg,#667eea,#764ba2)}
+.card-dot{position:absolute;bottom:0;right:0;width:13px;height:13px;border-radius:50%;background:#23a55a;border:2.5px solid #1c1a22;box-shadow:0 0 8px rgba(35,165,90,.7)}
+.card-info{flex:1;min-width:0}
+.card-top{display:flex;align-items:center;gap:5px;margin-bottom:4px;flex-wrap:wrap}
+.card-name{font-size:.88rem;font-weight:700;color:#fff}
+.card-tag{font-size:.68rem;font-weight:600;padding:2px 7px;border-radius:4px;letter-spacing:.03em}
+.tag-blue{background:#5865f2;color:#fff}
+.tag-red{background:transparent;color:#ed4245;font-size:.9rem}
+.card-status{font-size:.72rem;color:rgba(255,255,255,.52);display:flex;align-items:center;gap:5px}
+.card-activity{font-size:.74rem;color:rgba(220,220,220,.92);margin-top:3px;text-align:left;width:100%}
+.card-guild{display:none;align-items:center;gap:4px;margin-top:3px;font-size:.64rem;color:rgba(255,255,255,.28);letter-spacing:.02em}
+.card-device{display:inline-flex;align-items:center;gap:3px;margin-left:4px;opacity:.45;vertical-align:middle}
+.card-device svg{width:11px;height:11px;fill:#fff}
+.card-av-deco{position:absolute;inset:-6px;border-radius:50%;pointer-events:none;z-index:2}
+
+/* ── LOCATION PIN GLOW ── */
+.loc-pin{filter:drop-shadow(0 0 4px rgba(255,255,255,.5));fill:rgba(255,255,255,.7) !important}
+
+/* ── WEALTH PIN ── */
+.wealth-pin{
+  width:18px;height:18px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+  cursor:none;
+  position:relative;
+  flex-shrink:0;
+  filter:drop-shadow(0 0 4px rgba(255,255,255,.8)) drop-shadow(0 0 10px rgba(255,255,255,.4));
+  animation:wealth-pulse 2.5s ease-in-out infinite;
+  margin-top:0;
+  align-self:center;
+}
+@keyframes wealth-pulse{
+  0%,100%{filter:drop-shadow(0 0 3px rgba(255,255,255,.7)) drop-shadow(0 0 8px rgba(255,255,255,.3))}
+  50%{filter:drop-shadow(0 0 7px rgba(255,255,255,1)) drop-shadow(0 0 16px rgba(255,255,255,.6))}
+}
+.wealth-pin svg{width:18px;height:18px;color:#fff}
+.wealth-pin::after{
+  content:attr(data-tip);
+  position:absolute;
+  bottom:calc(100% + 7px);
+  left:50%;transform:translateX(-50%);
+  font-size:.68rem;font-weight:700;
+  letter-spacing:.1em;
+  color:#fff;
+  text-shadow:0 0 10px rgba(255,255,255,.9),0 0 20px rgba(255,255,255,.5);
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .18s;
+}
+.wealth-pin:hover::after{opacity:1}
+
+/* ── SPOTIFY ── */
+.spotify{background:rgba(18,18,18,.22);border:1px solid rgba(30,215,96,.12);border-radius:14px;padding:11px 14px;display:none;align-items:center;gap:12px;margin-bottom:14px;max-width:320px;width:100%;backdrop-filter:blur(16px);box-shadow:0 4px 24px rgba(0,0,0,.55);position:relative;overflow:hidden}
+.spotify.on{display:flex}
+.spotify::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(30,215,96,.06),transparent 60%);pointer-events:none}
+.sp-cover{width:44px;height:44px;border-radius:6px;object-fit:cover;flex-shrink:0;background:#333;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+.sp-info{flex:1;min-width:0}
+.sp-track{font-size:.82rem;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;position:relative}
+.sp-artist{font-size:.68rem;color:rgba(255,255,255,.45);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.sp-bar-wrap{margin-top:7px}
+.sp-bar{width:100%;height:2px;background:rgba(255,255,255,.12);border-radius:2px}
+.sp-bar-fill{height:100%;background:#1ed760;border-radius:2px;width:0%;transition:width .9s linear}
+.sp-times{display:flex;justify-content:space-between;font-size:.54rem;color:rgba(255,255,255,.25);margin-top:3px;font-variant-numeric:tabular-nums}
+.sp-track-inner{display:inline-block;white-space:nowrap}
+.sp-track-inner.scroll{animation:sp-scroll 8s linear infinite}
+@keyframes sp-scroll{0%{transform:translateX(0)}40%{transform:translateX(var(--offset,0px))}60%{transform:translateX(var(--offset,0px))}100%{transform:translateX(0)}}
+.sp-logo{position:absolute;top:10px;right:12px;opacity:.35}
+.sp-logo svg{width:14px;height:14px;fill:#1ed760}
+
+.card-links{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px}
+.card-link{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;backdrop-filter:blur(8px);transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 0 12px rgba(255,255,255,.1)}
+.card-link:hover{background:rgba(255,255,255,.22);transform:translateY(-3px);box-shadow:0 0 22px rgba(255,255,255,.35),0 6px 22px rgba(0,0,0,.45)}
+.card-link svg{width:22px;height:22px;fill:#fff;filter:drop-shadow(0 0 5px rgba(255,255,255,.6))}
+
+.socials{display:flex;align-items:center;gap:10px}
+.soc-btn{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;backdrop-filter:blur(8px);transition:background .2s,transform .2s,box-shadow .2s}
+.soc-btn:hover{background:rgba(255,255,255,.22);transform:translateY(-3px);box-shadow:0 6px 22px rgba(0,0,0,.45)}
+.soc-btn svg{width:22px;height:22px;fill:#fff}
+
+.views{position:fixed;bottom:20px;left:20px;display:flex;align-items:center;gap:5px;font-size:.75rem;color:rgba(255,255,255,.4);font-weight:500}
+.views svg{width:14px;height:14px;fill:rgba(255,255,255,.4)}
+
+.mplayer{position:fixed;bottom:20px;right:20px;z-index:200;width:210px;background:rgba(10,8,16,.12);border:1px solid rgba(255,255,255,.06);border-radius:12px;backdrop-filter:blur(24px);overflow:hidden;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.mplayer.col{transform:translateY(calc(100% - 36px))}
+.mp-head{display:flex;align-items:center;justify-content:space-between;padding:9px 12px}
+.mp-now{display:flex;align-items:center;gap:8px;min-width:0;flex:1}
+.mp-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;transition:background .3s}
+.mp-dot.on{background:#fff;box-shadow:0 0 6px rgba(255,255,255,.6);animation:dot-pulse 1.5s ease-in-out infinite}
+@keyframes dot-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.mp-track-head{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mp-tog{background:none;border:none;color:rgba(255,255,255,.25);font-size:.58rem;line-height:1;padding:2px 3px;flex-shrink:0;transition:color .2s}
+.mp-tog:hover{color:rgba(255,255,255,.7)}
+.mp-body{padding:0 12px 11px}
+.mp-prog{width:100%;height:2px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:10px;position:relative}
+.mp-fill{height:100%;background:rgba(255,255,255,.6);border-radius:2px;width:0%;transition:width .35s linear}
+.mp-ctrl{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.mp-ctrl-left{display:flex;align-items:center;gap:10px}
+.mc{background:none;border:none;color:rgba(255,255,255,.35);font-size:.78rem;line-height:1;transition:color .18s,transform .12s}
+.mc:hover{color:#fff;transform:scale(1.15)}
+.mc.pbtn{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.25)!important;color:rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;font-size:.65rem;transition:background .18s,color .18s,transform .12s!important}
+.mc.pbtn:hover{background:rgba(255,255,255,.1);color:#fff}
+.mp-vol{display:flex;align-items:center;gap:6px}
+.mp-vol-ic{font-size:.6rem;color:rgba(255,255,255,.2)}
+input[type=range]{-webkit-appearance:none;width:58px;height:2px;background:rgba(255,255,255,.12);border-radius:2px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.75);box-shadow:0 0 4px rgba(255,255,255,.4)}
+
+.reveal{animation:ri .7s ease both}
+@keyframes ri{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.d1{animation-delay:.06s}.d2{animation-delay:.16s}.d3{animation-delay:.26s}
+.d4{animation-delay:.36s}.d5{animation-delay:.46s}.d6{animation-delay:.56s}.d7{animation-delay:.66s}
+</style>
+<style>@keyframes slide-in-one-tap {
+  from {
+    transform: translateY(80px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+
+.trust-hide-gracefully {
+  opacity: 0;
+}
+
+.trust-wallet-one-tap .hidden {
+    display: none;
+  }
+
+.trust-wallet-one-tap .semibold {
+    font-weight: 500;
+  }
+
+.trust-wallet-one-tap .binance-plex {
+    font-family: 'Binance';
+  }
+
+.trust-wallet-one-tap .rounded-full {
+    border-radius: 50%;
+  }
+
+.trust-wallet-one-tap .flex {
+    display: flex;
+  }
+
+.trust-wallet-one-tap .flex-col {
+    flex-direction: column;
+  }
+
+.trust-wallet-one-tap .items-center {
+    align-items: center;
+  }
+
+.trust-wallet-one-tap .space-between {
+    justify-content: space-between;
+  }
+
+.trust-wallet-one-tap .justify-center {
+    justify-content: center;
+  }
+
+.trust-wallet-one-tap .w-full {
+    width: 100%;
+  }
+
+.trust-wallet-one-tap .box {
+    transition: all 0.5s cubic-bezier(0, 0, 0, 1.43);
+    animation: slide-in-one-tap 0.5s cubic-bezier(0, 0, 0, 1.43);
+    width: 384px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1020;
+  }
+
+.trust-wallet-one-tap .header {
+    gap: 15px;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 10px 18px;
+  }
+
+.trust-wallet-one-tap .header .left-items {
+      gap: 15px;
+    }
+
+.trust-wallet-one-tap .header .title {
+      color: #1e2329;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 28px;
+    }
+
+.trust-wallet-one-tap .header .subtitle {
+      color: #474d57;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .header .close {
+      color: #1e2329;
+      cursor: pointer;
+    }
+
+.trust-wallet-one-tap .body {
+    padding: 9px 18px;
+    gap: 10px;
+  }
+
+.trust-wallet-one-tap .body .right-items {
+      gap: 10px;
+      width: 100%;
+    }
+
+.trust-wallet-one-tap .body .right-items .wallet-title {
+        color: #1e2329;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .body .right-items .wallet-subtitle {
+        color: #474d57;
+        font-size: 14px;
+        line-height: 20px;
+      }
+
+.trust-wallet-one-tap .connect-indicator {
+    gap: 15px;
+    padding: 8px 0;
+  }
+
+.trust-wallet-one-tap .connect-indicator .flow-icon {
+      color: #474d57;
+    }
+
+.trust-wallet-one-tap .loading-color {
+    color: #fff;
+  }
+
+.trust-wallet-one-tap .button {
+    border-radius: 50px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    background-color: rgb(5, 0, 255);
+    border-color: rgb(229, 231, 235);
+    cursor: pointer;
+    text-align: center;
+    height: 45px;
+  }
+
+.trust-wallet-one-tap .button .button-text {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+
+.trust-wallet-one-tap .footer {
+    margin: 20px 30px;
+  }
+
+.trust-wallet-one-tap .check-icon {
+    color: #fff;
+  }
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Regular.otf) format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-Medium.otf) format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Binance';
+  src: url(chrome-extension://egjidjbpglichdcondbcbdnbeeppgdph/fonts/BinancePlex-SemiBold.otf) format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL2FwcC9zcmMvb25lVGFwL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0lBQ0UsMkJBQTJCO0VBQzdCO0VBQ0E7SUFDRSwwQkFBMEI7RUFDNUI7QUFDRjs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFHRTtJQUNFLGFBQWE7RUFDZjs7QUFFQTtJQUNFLGdCQUFnQjtFQUNsQjs7QUFFQTtJQUNFLHNCQUFzQjtFQUN4Qjs7QUFFQTtJQUNFLGtCQUFrQjtFQUNwQjs7QUFFQTtJQUNFLGFBQWE7RUFDZjs7QUFFQTtJQUNFLHNCQUFzQjtFQUN4Qjs7QUFFQTtJQUNFLG1CQUFtQjtFQUNyQjs7QUFFQTtJQUNFLDhCQUE4QjtFQUNoQzs7QUFFQTtJQUNFLHVCQUF1QjtFQUN6Qjs7QUFFQTtJQUNFLFdBQVc7RUFDYjs7QUFFQTtJQUNFLGdEQUFnRDtJQUNoRCw0REFBNEQ7SUFDNUQsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixnQkFBZ0I7SUFDaEIsK0NBQStDO0lBQy9DLGVBQWU7SUFDZixXQUFXO0lBQ1gsWUFBWTtJQUNaLGFBQWE7RUFDZjs7QUFFQTtJQUNFLFNBQVM7SUFDVCxnQ0FBZ0M7SUFDaEMsa0JBQWtCO0VBdUJwQjs7QUFyQkU7TUFDRSxTQUFTO0lBQ1g7O0FBRUE7TUFDRSxjQUFjO01BQ2QsZUFBZTtNQUNmLGdCQUFnQjtNQUNoQixpQkFBaUI7SUFDbkI7O0FBRUE7TUFDRSxjQUFjO01BQ2QsZUFBZTtNQUNmLGlCQUFpQjtJQUNuQjs7QUFFQTtNQUNFLGNBQWM7TUFDZCxlQUFlO0lBQ2pCOztBQUdGO0lBQ0UsaUJBQWlCO0lBQ2pCLFNBQVM7RUFtQlg7O0FBakJFO01BQ0UsU0FBUztNQUNULFdBQVc7SUFjYjs7QUFaRTtRQUNFLGNBQWM7UUFDZCxlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGlCQUFpQjtNQUNuQjs7QUFFQTtRQUNFLGNBQWM7UUFDZCxlQUFlO1FBQ2YsaUJBQWlCO01BQ25COztBQUlKO0lBQ0UsU0FBUztJQUNULGNBQWM7RUFLaEI7O0FBSEU7TUFDRSxjQUFjO0lBQ2hCOztBQUdGO0lBQ0UsV0FBVztFQUNiOztBQUVBO0lBQ0UsbUJBQW1CO0lBQ25CLDhCQUE4QjtJQUM5QixtQkFBbUI7SUFDbkIsZ0NBQWdDO0lBQ2hDLGdDQUFnQztJQUNoQyxlQUFlO0lBQ2Ysa0JBQWtCO0lBQ2xCLFlBQVk7RUFRZDs7QUFORTtNQUNFLFdBQVc7TUFDWCxlQUFlO01BQ2YsZ0JBQWdCO01BQ2hCLGlCQUFpQjtJQUNuQjs7QUFHRjtJQUNFLGlCQUFpQjtFQUNuQjs7QUFFQTtJQUNFLFdBQVc7RUFDYjs7QUFHRjtFQUNFLHNCQUFzQjtFQUN0QiwrREFBMEU7RUFDMUUsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QiwrREFBeUU7RUFDekUsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QiwrREFBMkU7RUFDM0UsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQiIsInNvdXJjZXNDb250ZW50IjpbIkBrZXlmcmFtZXMgc2xpZGUtaW4tb25lLXRhcCB7XG4gIGZyb20ge1xuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSg4MHB4KTtcbiAgfVxuICB0byB7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDBweCk7XG4gIH1cbn1cblxuLnRydXN0LWhpZGUtZ3JhY2VmdWxseSB7XG4gIG9wYWNpdHk6IDA7XG59XG5cbi50cnVzdC13YWxsZXQtb25lLXRhcCB7XG4gIC5oaWRkZW4ge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gIH1cblxuICAuc2VtaWJvbGQge1xuICAgIGZvbnQtd2VpZ2h0OiA1MDA7XG4gIH1cblxuICAuYmluYW5jZS1wbGV4IHtcbiAgICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICB9XG5cbiAgLnJvdW5kZWQtZnVsbCB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICB9XG5cbiAgLmZsZXgge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gIH1cblxuICAuZmxleC1jb2wge1xuICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gIH1cblxuICAuaXRlbXMtY2VudGVyIHtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB9XG5cbiAgLnNwYWNlLWJldHdlZW4ge1xuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgfVxuXG4gIC5qdXN0aWZ5LWNlbnRlciB7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gIH1cblxuICAudy1mdWxsIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgfVxuXG4gIC5ib3gge1xuICAgIHRyYW5zaXRpb246IGFsbCAwLjVzIGN1YmljLWJlemllcigwLCAwLCAwLCAxLjQzKTtcbiAgICBhbmltYXRpb246IHNsaWRlLWluLW9uZS10YXAgMC41cyBjdWJpYy1iZXppZXIoMCwgMCwgMCwgMS40Myk7XG4gICAgd2lkdGg6IDM4NHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbiAgICBib3gtc2hhZG93OiAwcHggMnB4IDRweCAwcHggcmdiYSgwLCAwLCAwLCAwLjI1KTtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgcmlnaHQ6IDMwcHg7XG4gICAgYm90dG9tOiAzMHB4O1xuICAgIHotaW5kZXg6IDEwMjA7XG4gIH1cblxuICAuaGVhZGVyIHtcbiAgICBnYXA6IDE1cHg7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkICNlNmU2ZTY7XG4gICAgcGFkZGluZzogMTBweCAxOHB4O1xuXG4gICAgLmxlZnQtaXRlbXMge1xuICAgICAgZ2FwOiAxNXB4O1xuICAgIH1cblxuICAgIC50aXRsZSB7XG4gICAgICBjb2xvcjogIzFlMjMyOTtcbiAgICAgIGZvbnQtc2l6ZTogMThweDtcbiAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgICBsaW5lLWhlaWdodDogMjhweDtcbiAgICB9XG5cbiAgICAuc3VidGl0bGUge1xuICAgICAgY29sb3I6ICM0NzRkNTc7XG4gICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICBsaW5lLWhlaWdodDogMjBweDtcbiAgICB9XG5cbiAgICAuY2xvc2Uge1xuICAgICAgY29sb3I6ICMxZTIzMjk7XG4gICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgfVxuICB9XG5cbiAgLmJvZHkge1xuICAgIHBhZGRpbmc6IDlweCAxOHB4O1xuICAgIGdhcDogMTBweDtcblxuICAgIC5yaWdodC1pdGVtcyB7XG4gICAgICBnYXA6IDEwcHg7XG4gICAgICB3aWR0aDogMTAwJTtcblxuICAgICAgLndhbGxldC10aXRsZSB7XG4gICAgICAgIGNvbG9yOiAjMWUyMzI5O1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtd2VpZ2h0OiA2MDA7XG4gICAgICAgIGxpbmUtaGVpZ2h0OiAyMHB4O1xuICAgICAgfVxuXG4gICAgICAud2FsbGV0LXN1YnRpdGxlIHtcbiAgICAgICAgY29sb3I6ICM0NzRkNTc7XG4gICAgICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICAgICAgbGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgICB9XG4gICAgfVxuICB9XG5cbiAgLmNvbm5lY3QtaW5kaWNhdG9yIHtcbiAgICBnYXA6IDE1cHg7XG4gICAgcGFkZGluZzogOHB4IDA7XG5cbiAgICAuZmxvdy1pY29uIHtcbiAgICAgIGNvbG9yOiAjNDc0ZDU3O1xuICAgIH1cbiAgfVxuXG4gIC5sb2FkaW5nLWNvbG9yIHtcbiAgICBjb2xvcjogI2ZmZjtcbiAgfVxuXG4gIC5idXR0b24ge1xuICAgIGJvcmRlci1yYWRpdXM6IDUwcHg7XG4gICAgb3V0bGluZTogMnB4IHNvbGlkIHRyYW5zcGFyZW50O1xuICAgIG91dGxpbmUtb2Zmc2V0OiAycHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDUsIDAsIDI1NSk7XG4gICAgYm9yZGVyLWNvbG9yOiByZ2IoMjI5LCAyMzEsIDIzNSk7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBoZWlnaHQ6IDQ1cHg7XG5cbiAgICAuYnV0dG9uLXRleHQge1xuICAgICAgY29sb3I6ICNmZmY7XG4gICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICBmb250LXdlaWdodDogNjAwO1xuICAgICAgbGluZS1oZWlnaHQ6IDIwcHg7XG4gICAgfVxuICB9XG5cbiAgLmZvb3RlciB7XG4gICAgbWFyZ2luOiAyMHB4IDMwcHg7XG4gIH1cblxuICAuY2hlY2staWNvbiB7XG4gICAgY29sb3I6ICNmZmY7XG4gIH1cbn1cblxuQGZvbnQtZmFjZSB7XG4gIGZvbnQtZmFtaWx5OiAnQmluYW5jZSc7XG4gIHNyYzogdXJsKCcuL2ZvbnRzL2JpbmFuY2VQbGV4L0JpbmFuY2VQbGV4LVJlZ3VsYXIub3RmJykgZm9ybWF0KCdvcGVudHlwZScpO1xuICBmb250LXdlaWdodDogNDAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICBzcmM6IHVybCgnLi9mb250cy9iaW5hbmNlUGxleC9CaW5hbmNlUGxleC1NZWRpdW0ub3RmJykgZm9ybWF0KCdvcGVudHlwZScpO1xuICBmb250LXdlaWdodDogNTAwO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ0JpbmFuY2UnO1xuICBzcmM6IHVybCgnLi9mb250cy9iaW5hbmNlUGxleC9CaW5hbmNlUGxleC1TZW1pQm9sZC5vdGYnKSBmb3JtYXQoJ29wZW50eXBlJyk7XG4gIGZvbnQtd2VpZ2h0OiA2MDA7XG4gIGZvbnQtc3R5bGU6IG5vcm1hbDtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */</style></head>
+<body>
+
+<div id="cur"><div id="cur-dot" style="left: 1811px; top: 12px;"></div><div id="cur-ring" style="left: 1810.95px; top: 12.092px;"></div></div>
+<video id="bg-video" autoplay="" muted="" loop="" playsinline="" src="https://r2.guns.lol/e36b3d0f-4f8a-492d-978c-b0bcd76ae3db.mp4" style="display: block;"></video>
+<div class="overlay"></div>
+<canvas id="fx-snow" class="fx-canvas" width="2124" height="1015"></canvas>
+<canvas id="fx-rain" class="fx-canvas"></canvas>
+<canvas id="fx-night" class="fx-canvas"></canvas>
+<div id="tv-layer"><div class="tv-scan"></div><div class="tv-noise"></div><div class="tv-rgb"></div><div class="tv-vignette"></div><div class="tv-hline"></div></div>
+
+<div id="splash" class="gone">
+  <div class="splash-title">versiondev</div>
+  <div class="splash-hint">click anywhere to enter</div>
+</div>
+
+<div class="center">
+  <div class="avatar-wrap reveal d1">
+    <img class="avatar" id="main-av" src="./v e r s i n_files/d04a1855548606af74125bb227aaf8db.webp" alt="avatar">
+  </div>
+  <div class="name reveal d2 fx-rainbow" id="name-el"><span class="tw-cur">|</span></div>
+  <p class="bio reveal d3" id="bio-el">Experienced scripter and owner of "Crown Softworks".
+2+ years of scripting for Roblox.</p>
+  <div class="ticker-wrap reveal d3" id="ticker-wrap">
+    <div class="ticker-track" id="ticker-track"><span class="ticker-item ticker-main" data-tip="5 years  ·  in 2021"><svg viewBox="0 0 100 100"><circle cx="46" cy="54" r="40" fill="currentColor"></circle><circle cx="63" cy="37" r="13" fill="var(--bg,#0a0908)"></circle><circle cx="82" cy="18" r="11" fill="currentColor"></circle></svg>Lua</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="2 years  ·  in 2024"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.15 16.45A7.5 7.5 0 1116.5 7l-1.8 1.56A5.25 5.25 0 1016.5 13.5l1.8 1.55c-.33.48-.72.92-1.15 1.4z"></path></svg>C / C++ / C#</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="3 years  ·  in 2023"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M11.96 2C9.12 2 7.3 3.16 7.3 4.86V6.5h4.66v.65H5.75C4.08 7.15 2.5 8.47 2.5 11.07c0 2.6 1.58 3.93 3.25 3.93H7.3v-1.88c0-1.84 1.59-3.12 3.67-3.12h4.63c1.66 0 3.12-1.37 3.12-3.12V4.86C18.72 3.16 16.44 2 13.57 2h-1.61zm-1.28 1.5c.62 0 1.12.5 1.12 1.12A1.12 1.12 0 0110.68 5.74a1.12 1.12 0 010-2.24zm3.72 16.5c2.84 0 4.6-1.16 4.6-2.86v-1.64h-4.6v-.65h6.22c1.67 0 3.28-1.32 3.28-3.92 0-2.6-1.61-3.93-3.28-3.93h-1.55v1.88c0 1.84-1.62 3.12-3.7 3.12h-4.6c-1.65 0-3.09 1.37-3.09 3.12v2.02c0 1.7 2.24 2.86 5.1 2.86h1.62zm1.28-1.5a1.12 1.12 0 01-1.12-1.12 1.12 1.12 0 011.12-1.12 1.12 1.12 0 010 2.24z"></path></svg>Python</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="5 years  ·  in 2021"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"></path></svg>HTML</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="5 years  ·  in 2021"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716H8.005l.21 2.622h7.23l-.337 3.956-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.91-10.25.3-3.245z"></path><text x="12" y="17" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Arial,sans-serif" fill="#0a0908">3</text></svg>CSS</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="3 years  ·  in 2023"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"></path></svg>JS</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="2 years  ·  in 2024"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor"></rect><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" font-family="Arial,sans-serif" fill="#0a0908">H</text></svg>AHK</span><span class="ticker-sep"></span><span class="ticker-item ticker-main" data-tip="5 years  ·  in 2021"><svg viewBox="0 0 100 100"><circle cx="46" cy="54" r="40" fill="currentColor"></circle><circle cx="63" cy="37" r="13" fill="var(--bg,#0a0908)"></circle><circle cx="82" cy="18" r="11" fill="currentColor"></circle></svg>Lua</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="2 years  ·  in 2024"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.15 16.45A7.5 7.5 0 1116.5 7l-1.8 1.56A5.25 5.25 0 1016.5 13.5l1.8 1.55c-.33.48-.72.92-1.15 1.4z"></path></svg>C / C++ / C#</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="3 years  ·  in 2023"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M11.96 2C9.12 2 7.3 3.16 7.3 4.86V6.5h4.66v.65H5.75C4.08 7.15 2.5 8.47 2.5 11.07c0 2.6 1.58 3.93 3.25 3.93H7.3v-1.88c0-1.84 1.59-3.12 3.67-3.12h4.63c1.66 0 3.12-1.37 3.12-3.12V4.86C18.72 3.16 16.44 2 13.57 2h-1.61zm-1.28 1.5c.62 0 1.12.5 1.12 1.12A1.12 1.12 0 0110.68 5.74a1.12 1.12 0 010-2.24zm3.72 16.5c2.84 0 4.6-1.16 4.6-2.86v-1.64h-4.6v-.65h6.22c1.67 0 3.28-1.32 3.28-3.92 0-2.6-1.61-3.93-3.28-3.93h-1.55v1.88c0 1.84-1.62 3.12-3.7 3.12h-4.6c-1.65 0-3.09 1.37-3.09 3.12v2.02c0 1.7 2.24 2.86 5.1 2.86h1.62zm1.28-1.5a1.12 1.12 0 01-1.12-1.12 1.12 1.12 0 011.12-1.12 1.12 1.12 0 010 2.24z"></path></svg>Python</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="5 years  ·  in 2021"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"></path></svg>HTML</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="5 years  ·  in 2021"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716H8.005l.21 2.622h7.23l-.337 3.956-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.91-10.25.3-3.245z"></path><text x="12" y="17" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Arial,sans-serif" fill="#0a0908">3</text></svg>CSS</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="3 years  ·  in 2023"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"></path></svg>JS</span><span class="ticker-sep"></span><span class="ticker-item" data-tip="2 years  ·  in 2024"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor"></rect><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" font-family="Arial,sans-serif" fill="#0a0908">H</text></svg>AHK</span></div>
+  </div>
+  <div class="location reveal d3">
+    <svg class="loc-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
+    <span id="loc-text">Russia</span>
+  </div>
+  <div class="card reveal d4">
+    <div class="card-av-wrap">
+      <img class="card-av" id="card-av" src="./v e r s i n_files/d04a1855548606af74125bb227aaf8db.webp" alt="">
+      <div class="card-dot" id="card-dot" style="background: rgb(240, 178, 50); box-shadow: rgb(240, 178, 50) 0px 0px 8px;"></div>
+    </div>
+    <div class="card-info">
+      <div class="card-top" id="card-top"><span class="card-name">Version Z</span><span class="card-tag tag-blue"><img src="./v e r s i n_files/e3bf9804f050d89b3aac499e2e9247fc.png" style="width:13px;height:13px;border-radius:3px;object-fit:cover;margin-right:3px;vertical-align:middle"> LUA</span><div class="wealth-pin" data-tip="Rich" style="margin-left:2px"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"></circle><text x="10" y="10" dy=".35em" text-anchor="middle" font-size="9" font-weight="700" font-family="Arial,sans-serif" fill="currentColor">$</text></svg></div></div>
+      <div class="card-status" id="card-status"><span style="color:#f0b232">● Idle</span><span class="card-device" title="Desktop"><svg viewBox="0 0 24 24"><path d="M21 2H3a2 2 0 00-2 2v12a2 2 0 002 2h7l-2 3v1h8v-1l-2-3h7a2 2 0 002-2V4a2 2 0 00-2-2zm0 14H3V4h18v12z"></path></svg></span></div>
+      <div class="card-activity" id="card-activity"></div>
+      <div class="card-guild" id="card-guild" style="display: none;"></div>
+    </div>
+  </div>
+
+  <div class="spotify" id="sp-card">
+    <img class="sp-cover" id="sp-cover" src="https://crownsoftworks.neocities.org/bio" alt="">
+    <div class="sp-info">
+      <div class="sp-track" id="sp-track"></div>
+      <div class="sp-artist" id="sp-artist"></div>
+      <div class="sp-bar-wrap">
+        <div class="sp-bar"><div class="sp-bar-fill" id="sp-fill"></div></div>
+        <div class="sp-times"><span id="sp-cur">0:00</span><span id="sp-end">0:00</span></div>
+      </div>
+    </div>
+    <div class="sp-logo"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"></path></svg></div>
+  </div>
+
+  <div class="card-links reveal d5">
+    <a href="https://crownzov.xyz/" class="card-link" target="_blank" rel="noopener" title="crownzov.xyz"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></svg></a>
+    <a href="https://discord.gg/crownzov" class="card-link" target="_blank" rel="noopener" title="discord.gg/crownzov"><svg viewBox="0 0 24 24"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 00-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 00-5.487 0 12.36 12.36 0 00-.617-1.23A.077.077 0 008.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 00-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 00.031.055 20.03 20.03 0 005.993 2.98.078.078 0 00.084-.026c.462-.62.874-1.275 1.226-1.963a.074.074 0 00-.041-.104 13.201 13.201 0 01-1.872-.878.075.075 0 01-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 01.078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 01.079.009c.12.098.245.195.372.288a.075.075 0 01-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 00-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 00.084.028 19.963 19.963 0 006.002-2.981.076.076 0 00.032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 00-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"></path></svg></a>
+  </div>
+
+
+
+  <div class="socials reveal d6" id="socials-wrap"></div>
+</div>
+
+<div class="views">
+  <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+  <span id="views-el"></span>
+</div>
+
+<div class="mplayer" id="mplayer">
+  <div class="mp-head">
+    <div class="mp-now">
+      <div class="mp-dot" id="mp-dot"></div>
+      <div class="mp-track-head" id="mp-track-head">Снежинка — mzlff</div>
+    </div>
+    <button class="mp-tog" id="mp-tog" onclick="togglePlayer()">▾</button>
+  </div>
+  <div class="mp-body">
+    <div class="mp-prog" id="mp-prog" onclick="seekAu(event)">
+      <div class="mp-fill" id="mp-fill" style="width: 35.0568%;"></div>
+    </div>
+    <div class="mp-ctrl">
+      <div class="mp-ctrl-left">
+        <button class="mc" onclick="prevT()">⏮</button>
+        <button class="mc pbtn" id="mp-play" onclick="playPause()">▶</button>
+        <button class="mc" onclick="nextT()">⏭</button>
+      </div>
+      <div class="mp-vol">
+        <span class="mp-vol-ic">🔈</span>
+        <input type="range" min="0" max="1" step=".02" value=".65" oninput="au.volume=+this.value">
+      </div>
+    </div>
+  </div>
+</div>
+
+<svg style="display:none">
+  <symbol id="ico-roblox" viewBox="0 0 24 24"><path d="M5.24 0L0 18.9 18.76 24 24 5.1zm10.99 14.23l-5.17-1.38 1.38-5.18 5.17 1.38z"></path></symbol>
+  <symbol id="ico-youtube" viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.52 3.5 12 3.5 12 3.5s-7.52 0-9.38.55A3.02 3.02 0 00.5 6.19 31.7 31.7 0 000 12a31.7 31.7 0 00.5 5.81 3.02 3.02 0 002.12 2.14C4.48 20.5 12 20.5 12 20.5s7.52 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.7 31.7 0 0024 12a31.7 31.7 0 00-.5-5.81zM9.75 15.5v-7l6.5 3.5-6.5 3.5z"></path></symbol>
+  <symbol id="ico-discord" viewBox="0 0 24 24"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 00-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 00-5.487 0 12.36 12.36 0 00-.617-1.23A.077.077 0 008.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 00-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 00.031.055 20.03 20.03 0 005.993 2.98.078.078 0 00.084-.026c.462-.62.874-1.275 1.226-1.963a.074.074 0 00-.041-.104 13.201 13.201 0 01-1.872-.878.075.075 0 01-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 01.078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 01.079.009c.12.098.245.195.372.288a.075.075 0 01-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 00-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 00.084.028 19.963 19.963 0 006.002-2.981.076.076 0 00.032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 00-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"></path></symbol>
+  <symbol id="ico-website" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></symbol>
+</svg>
+
+<script>
+const cdot=document.getElementById('cur-dot'),cring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cdot.style.left=mx+'px';cdot.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;cring.style.left=rx+'px';cring.style.top=ry+'px';requestAnimationFrame(loop)})();
+
+const splash=document.getElementById('splash');
+let splashGone=false;
+function dismissSplash(){if(splashGone)return;splashGone=true;splash.classList.add('gone');tryAutoplay()}
+splash.addEventListener('click',dismissSplash);
+splash.addEventListener('touchend',dismissSplash);
+
+(function(){
+  const t=CONFIG.TAB_TEXT;let i=0,dir=1,pause=0;
+  setInterval(()=>{if(pause>0){pause--;return}document.title=t.slice(0,i)+(i<t.length?'|':'');i+=dir;if(i>t.length){dir=-1;i=t.length;pause=8}if(i<0){dir=1;i=0;pause=4}},150);
+})();
+
+(function(){
+  const vid=document.getElementById('bg-video');
+  const type=CONFIG.BG_TYPE,size=CONFIG.BG_SIZE||'cover';
+  function showImage(src){document.body.style.backgroundImage='url("'+src+'")';document.body.style.backgroundSize=(size==='repeat')?'auto':size;document.body.style.backgroundRepeat=(size==='repeat')?'repeat':'no-repeat';document.body.style.backgroundPosition='center center';vid.style.display='none'}
+  function showVideo(src){vid.src=src;vid.style.display='block';vid.play().catch(function(){if(CONFIG.IMAGE_SRC)showImage(CONFIG.IMAGE_SRC)});vid.addEventListener('error',function(){if(CONFIG.IMAGE_SRC)showImage(CONFIG.IMAGE_SRC)},{once:true})}
+  if(type==='video'&&CONFIG.VIDEO_SRC)showVideo(CONFIG.VIDEO_SRC);
+  else if(CONFIG.IMAGE_SRC)showImage(CONFIG.IMAGE_SRC);
+})();
+
+const effects=CONFIG.BG_EFFECTS||[];
+function setupCanvas(id){const c=document.getElementById(id),ctx=c.getContext('2d');const r=()=>{c.width=window.innerWidth;c.height=window.innerHeight};r();window.addEventListener('resize',r);return{c,ctx}}
+if(effects.includes('tv'))document.getElementById('tv-layer').classList.add('on');
+if(effects.includes('snow')){const{c,ctx}=setupCanvas('fx-snow');const fl=Array.from({length:130},()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,r:Math.random()*2+.4,vx:(Math.random()-.5)*.35,vy:Math.random()*.7+.3,a:Math.random()*.55+.15}));(function loop(){ctx.clearRect(0,0,c.width,c.height);fl.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.y>c.height){p.y=-5;p.x=Math.random()*c.width}if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+p.a+')';ctx.fill()});requestAnimationFrame(loop)})()}
+if(effects.includes('rain')){const{c,ctx}=setupCanvas('fx-rain');const dr=Array.from({length:220},()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,len:Math.random()*18+8,speed:Math.random()*6+9,a:Math.random()*.3+.08}));(function loop(){ctx.clearRect(0,0,c.width,c.height);dr.forEach(p=>{ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x-1.2,p.y+p.len);ctx.strokeStyle='rgba(180,215,255,'+p.a+')';ctx.lineWidth=.9;ctx.stroke();p.y+=p.speed*.15;if(p.y>c.height){p.y=-p.len;p.x=Math.random()*c.width}});requestAnimationFrame(loop)})()}
+if(effects.includes('night')){const{c,ctx}=setupCanvas('fx-night');const st=Array.from({length:200},()=>({x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight*.7,r:Math.random()*1.1+.2,a:Math.random()*.6+.2,tw:Math.random()*3+1,off:Math.random()*Math.PI*2}));let t=0;(function loop(){t+=.016;ctx.clearRect(0,0,c.width,c.height);st.forEach(p=>{const a=p.a*(.55+.45*Math.sin(t/p.tw+p.off));ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+a+')';ctx.fill()});requestAnimationFrame(loop)})()}
+
+const nameEl=document.getElementById('name-el');
+const nameFX=CONFIG.NAME_EFFECTS||[];
+if(nameFX.includes('typewriter')){const full=CONFIG.NAME;let ni=0,nd=1,np=0;const txtNode=document.createTextNode('');const curEl=document.createElement('span');curEl.className='tw-cur';curEl.textContent='|';nameEl.appendChild(txtNode);nameEl.appendChild(curEl);setInterval(()=>{if(np>0){np--;return}txtNode.textContent=full.slice(0,ni);ni+=nd;if(ni>full.length){nd=-1;ni=full.length;np=10}if(ni<0){nd=1;ni=0;np=5}},120)}else{nameEl.textContent=CONFIG.NAME}
+if(nameFX.includes('glow'))nameEl.classList.add('fx-glow');
+if(nameFX.includes('rainbow'))nameEl.classList.add('fx-rainbow');
+
+document.getElementById('bio-el').textContent=CONFIG.BIO;
+document.getElementById('loc-text').textContent=CONFIG.LOCATION;
+document.getElementById('views-el').textContent=CONFIG.VIEWS;
+
+if(CONFIG.AVATAR_URL){document.getElementById('main-av').src=CONFIG.AVATAR_URL;if(!CONFIG.DISCORD_ID)document.getElementById('card-av').src=CONFIG.AVATAR_URL}
+
+function renderStaticCard(){const s=CONFIG.CARD_STATIC;document.getElementById('card-top').innerHTML='<span class="card-name">'+s.name+'</span><div class="wealth-pin" data-tip="Rich" style="margin-left:2px"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="10" y="10" dy=".35em" text-anchor="middle" font-size="9" font-weight="700" font-family="Arial,sans-serif" fill="currentColor">$</text></svg></div>';document.getElementById('card-status').innerHTML='<span>'+s.status+'</span>';if(CONFIG.AVATAR_URL)document.getElementById('card-av').src=CONFIG.AVATAR_URL}
+function statusColor(s){return{online:'#23a55a',idle:'#f0b232',dnd:'#ed4245',offline:'#80848e'}[s]||'#80848e'}
+function applyLanyard(d){
+  const sc=statusColor(d.discord_status);
+  const dot=document.getElementById('card-dot');
+  dot.style.background=sc;dot.style.boxShadow='0 0 8px '+sc;
+  const u=d.discord_user;
+  if(u.avatar){const av='https://cdn.discordapp.com/avatars/'+u.id+'/'+u.avatar+'.webp?size=128';document.getElementById('card-av').src=av;if(!CONFIG.AVATAR_URL)document.getElementById('main-av').src=av}
+  const name=u.display_name||u.global_name||u.username;
+  let topHTML='<span class="card-name">'+name+'</span>';
+  if(u.primary_guild&&u.primary_guild.tag){let badgeHTML='';if(u.primary_guild.badge&&u.primary_guild.identity_guild_id){const iconUrl='https://cdn.discordapp.com/clan-badges/'+u.primary_guild.identity_guild_id+'/'+u.primary_guild.badge+'.png?size=32';badgeHTML='<img src="'+iconUrl+'" style="width:13px;height:13px;border-radius:3px;object-fit:cover;margin-right:3px;vertical-align:middle"> '}topHTML+='<span class="card-tag tag-blue">'+badgeHTML+u.primary_guild.tag+'</span>'}
+  topHTML += '<div class="wealth-pin" data-tip="Rich" style="margin-left:2px"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><text x="10" y="10" dy=".35em" text-anchor="middle" font-size="9" font-weight="700" font-family="Arial,sans-serif" fill="currentColor">$</text></svg></div>';
+  document.getElementById('card-top').innerHTML=topHTML;
+  const sm={online:'Online',idle:'Idle',dnd:'Do Not Disturb',offline:'Offline'};
+  let deviceIcon='';
+  if(d.active_on_discord_mobile)deviceIcon='<span class="card-device" title="Mobile"><svg viewBox="0 0 24 24"><path d="M17 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2zm-5 18a1.5 1.5 0 110-3 1.5 1.5 0 010 3zm5-4H7V4h10v12z"/></svg></span>';
+  else if(d.active_on_discord_web)deviceIcon='<span class="card-device" title="Browser"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 14H4V8h16v10z"/></svg></span>';
+  else deviceIcon='<span class="card-device" title="Desktop"><svg viewBox="0 0 24 24"><path d="M21 2H3a2 2 0 00-2 2v12a2 2 0 002 2h7l-2 3v1h8v-1l-2-3h7a2 2 0 002-2V4a2 2 0 00-2-2zm0 14H3V4h18v12z"/></svg></span>';
+  document.getElementById('card-status').innerHTML='<span style="color:'+sc+'">● '+(sm[d.discord_status]||d.discord_status)+'</span>'+deviceIcon;
+  if(u.avatar_decoration_data&&u.avatar_decoration_data.asset){const decoUrl='https://cdn.discordapp.com/avatar-decoration-presets/'+u.avatar_decoration_data.asset+'.png?size=96&passthrough=true';let decoEl=document.getElementById('av-deco');if(!decoEl){decoEl=document.createElement('img');decoEl.id='av-deco';decoEl.className='card-av-deco';document.querySelector('.card-av-wrap').appendChild(decoEl)}decoEl.src=decoUrl}
+  const actEl=document.getElementById('card-activity');
+  const playAct=(d.activities||[]).find(a=>a.type===0);
+  const customAct=(d.activities||[]).find(a=>a.type===4);
+  if(playAct)actEl.innerHTML='<span>Playing '+playAct.name+'</span>';
+  else if(customAct&&customAct.state){const ico=(customAct.emoji&&customAct.emoji.name)?customAct.emoji.name+' ':'';actEl.innerHTML='<span>'+ico+customAct.state+'</span>'}
+  else actEl.textContent='';
+  document.getElementById('card-guild').style.display='none';
+  const spCard=document.getElementById('sp-card');
+  if(d.listening_to_spotify&&d.spotify){
+    const sp=d.spotify;
+    const spTrackEl=document.getElementById('sp-track');
+    spTrackEl.innerHTML='<span class="sp-track-inner" id="sp-track-inner">'+sp.song+'</span>';
+    setTimeout(()=>{const inner=document.getElementById('sp-track-inner');if(inner&&inner.scrollWidth>spTrackEl.offsetWidth){const offset=-(inner.scrollWidth-spTrackEl.offsetWidth+10);inner.style.setProperty('--offset',offset+'px');inner.classList.add('scroll')}},100);
+    document.getElementById('sp-artist').textContent=sp.artist;
+    document.getElementById('sp-cover').src=sp.album_art_url;
+    spCard.classList.add('on');
+    const dur=sp.timestamps.end-sp.timestamps.start;
+    const pos=Date.now()-sp.timestamps.start;
+    document.getElementById('sp-fill').style.width=Math.min(100,(pos/dur)*100)+'%';
+    const fmt=s=>{const t=Math.floor(s/1000);return Math.floor(t/60)+':'+(t%60+'').padStart(2,'0')};
+    document.getElementById('sp-cur').textContent=fmt(pos);
+    document.getElementById('sp-end').textContent=fmt(dur);
+    if(window._spTimer)clearInterval(window._spTimer);
+    window._spTimer=setInterval(()=>{const p2=Math.min(100,((Date.now()-sp.timestamps.start)/dur)*100);document.getElementById('sp-fill').style.width=p2+'%';document.getElementById('sp-cur').textContent=fmt(Date.now()-sp.timestamps.start)},1000);
+  } else {
+    spCard.classList.remove('on');
+    if(window._spTimer){clearInterval(window._spTimer);window._spTimer=null}
+  }
+}
+if(CONFIG.DISCORD_ID){
+  fetch('https://api.lanyard.rest/v1/users/'+CONFIG.DISCORD_ID).then(r=>r.json()).then(j=>{if(j.success)applyLanyard(j.data);else renderStaticCard()}).catch(()=>renderStaticCard());
+  (function connectWS(){const ws=new WebSocket('wss://api.lanyard.rest/socket');let hb=null;ws.addEventListener('message',e=>{let msg;try{msg=JSON.parse(e.data)}catch{return}if(msg.op===1){hb=setInterval(()=>{if(ws.readyState===1)ws.send(JSON.stringify({op:3}))},msg.d.heartbeat_interval);ws.send(JSON.stringify({op:2,d:{subscribe_to_id:CONFIG.DISCORD_ID}}))}if(msg.op===0&&msg.d&&(msg.t==='INIT_STATE'||msg.t==='PRESENCE_UPDATE')){const data=msg.t==='INIT_STATE'?(msg.d[CONFIG.DISCORD_ID]||msg.d):msg.d;if(data)applyLanyard(data)}});ws.addEventListener('close',()=>{clearInterval(hb);setTimeout(connectWS,3000)});ws.addEventListener('error',()=>ws.close())})();
+}else renderStaticCard();
+
+(function(){const wrap=document.getElementById('socials-wrap');CONFIG.SOCIALS.forEach(s=>{if(!s.href)return;const a=document.createElement('a');a.href=s.href;a.target='_blank';a.rel='noopener';a.title=s.title;a.className='soc-btn';a.innerHTML='<svg><use href="#ico-'+s.id+'"/></svg>';wrap.appendChild(a)})})();
+
+
+
+const LANGS=[
+  {name:'Lua',years:'5 years',since:2021,main:true,svg:'<svg viewBox="0 0 100 100"><circle cx="46" cy="54" r="40" fill="currentColor"/><circle cx="63" cy="37" r="13" fill="var(--bg,#0a0908)"/><circle cx="82" cy="18" r="11" fill="currentColor"/></svg>'},
+  {name:'C / C++ / C#',years:'2 years',since:2024,main:false,svg:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M17.15 16.45A7.5 7.5 0 1116.5 7l-1.8 1.56A5.25 5.25 0 1016.5 13.5l1.8 1.55c-.33.48-.72.92-1.15 1.4z"/></svg>'},
+  {name:'Python',years:'3 years',since:2023,main:false,svg:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M11.96 2C9.12 2 7.3 3.16 7.3 4.86V6.5h4.66v.65H5.75C4.08 7.15 2.5 8.47 2.5 11.07c0 2.6 1.58 3.93 3.25 3.93H7.3v-1.88c0-1.84 1.59-3.12 3.67-3.12h4.63c1.66 0 3.12-1.37 3.12-3.12V4.86C18.72 3.16 16.44 2 13.57 2h-1.61zm-1.28 1.5c.62 0 1.12.5 1.12 1.12A1.12 1.12 0 0110.68 5.74a1.12 1.12 0 010-2.24zm3.72 16.5c2.84 0 4.6-1.16 4.6-2.86v-1.64h-4.6v-.65h6.22c1.67 0 3.28-1.32 3.28-3.92 0-2.6-1.61-3.93-3.28-3.93h-1.55v1.88c0 1.84-1.62 3.12-3.7 3.12h-4.6c-1.65 0-3.09 1.37-3.09 3.12v2.02c0 1.7 2.24 2.86 5.1 2.86h1.62zm1.28-1.5a1.12 1.12 0 01-1.12-1.12 1.12 1.12 0 011.12-1.12 1.12 1.12 0 010 2.24z"/></svg>'},
+  {name:'HTML',years:'5 years',since:2021,main:false,svg:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>'},
+  {name:'CSS',years:'5 years',since:2021,main:false,svg:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716H8.005l.21 2.622h7.23l-.337 3.956-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.91-10.25.3-3.245z"/><text x="12" y="17" text-anchor="middle" font-size="7.5" font-weight="700" font-family="Arial,sans-serif" fill="#0a0908">3</text></svg>'},
+  {name:'JS',years:'3 years',since:2023,main:false,svg:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/></svg>'},
+  {name:'AHK',years:'2 years',since:2024,main:false,svg:'<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="700" font-family="Arial,sans-serif" fill="#0a0908">H</text></svg>'},
+];
+
+function buildTicker(){
+  const track=document.getElementById('ticker-track');if(!track)return;
+  const items=[...LANGS,...LANGS];
+  items.forEach((lang,idx)=>{
+    const item=document.createElement('span');
+    item.className='ticker-item'+(lang.main?' ticker-main':'');
+    item.setAttribute('data-tip',lang.years+'  ·  in '+lang.since);
+    item.innerHTML=lang.svg+lang.name;
+    item.addEventListener('mouseenter',showTip);
+    item.addEventListener('mouseleave',hideTip);
+    track.appendChild(item);
+    if(idx<items.length-1){const sep=document.createElement('span');sep.className='ticker-sep';track.appendChild(sep)}
+  });
+}
+const tipEl=document.createElement('div');
+tipEl.style.cssText='position:fixed;z-index:9000;background:rgba(15,13,22,.92);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 13px;font-size:.72rem;color:rgba(255,255,255,.85);pointer-events:none;opacity:0;transition:opacity .18s ease;white-space:nowrap;backdrop-filter:blur(12px);box-shadow:0 4px 20px rgba(0,0,0,.5);letter-spacing:.04em;';
+document.body.appendChild(tipEl);
+function showTip(e){const txt=e.currentTarget.getAttribute('data-tip');if(!txt)return;tipEl.textContent=txt;tipEl.style.opacity='1';moveTip(e);e.currentTarget.addEventListener('mousemove',moveTip)}
+function hideTip(e){tipEl.style.opacity='0';e.currentTarget.removeEventListener('mousemove',moveTip)}
+function moveTip(e){tipEl.style.left=(e.clientX+14)+'px';tipEl.style.top=(e.clientY-36)+'px'}
+buildTicker();
+
+const au=new Audio();au.volume=.65;let ti=0,isPlaying=false;
+function fmt(s){if(!s||isNaN(s))return'0:00';const m=Math.floor(s/60);return m+':'+(Math.floor(s%60)+'').padStart(2,'0')}
+function loadTrack(i,andPlay){const t=CONFIG.PLAYLIST[i];document.getElementById('mp-track-head').textContent=t.track+' — '+t.artist;document.getElementById('mp-fill').style.width='0%';au.src=t.url;if(andPlay)au.play().catch(()=>{})}
+function setPlaying(v){isPlaying=v;document.getElementById('mp-play').textContent=v?'⏸':'▶';document.getElementById('mp-dot').classList.toggle('on',v)}
+function playAu(){au.play().then(()=>setPlaying(true)).catch(()=>{})}
+function pauseAu(){au.pause();setPlaying(false)}
+function playPause(){isPlaying?pauseAu():playAu()}
+function nextT(){ti=(ti+1)%CONFIG.PLAYLIST.length;loadTrack(ti,isPlaying)}
+function prevT(){ti=(ti-1+CONFIG.PLAYLIST.length)%CONFIG.PLAYLIST.length;loadTrack(ti,isPlaying)}
+au.addEventListener('ended',nextT);
+au.addEventListener('timeupdate',()=>{if(!au.duration||isNaN(au.duration))return;document.getElementById('mp-fill').style.width=(au.currentTime/au.duration*100)+'%'});
+function seekAu(e){const b=document.getElementById('mp-prog');const p=Math.max(0,Math.min(1,e.offsetX/b.offsetWidth));if(au.duration&&!isNaN(au.duration))au.currentTime=p*au.duration}
+let pCol=false;
+function togglePlayer(){pCol=!pCol;document.getElementById('mplayer').classList.toggle('col',pCol);document.getElementById('mp-tog').textContent=pCol?'▴':'▾'}
+loadTrack(0,false);
+function tryAutoplay(){if(isPlaying)return;au.play().then(()=>setPlaying(true)).catch(()=>{})}
+</script><div style="position: fixed; z-index: 9000; background: rgba(15, 13, 22, 0.92); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 7px 13px; font-size: 0.72rem; color: rgba(255, 255, 255, 0.85); pointer-events: none; opacity: 0; transition: opacity 0.18s; white-space: nowrap; backdrop-filter: blur(12px); box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 20px; letter-spacing: 0.04em;"></div>
+
+</body></html>
